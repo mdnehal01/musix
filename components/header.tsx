@@ -16,7 +16,7 @@ import toast from "react-hot-toast";
 
 interface HeaderProps{
     children:React.ReactNode;
-    className?:String;
+    className?:string;
 }
 
 const Header:React.FC<HeaderProps> = ({children, className}) => {

@@ -12,7 +12,7 @@ import useOnPlay from "@/hooks/useOnPlay";
 
 interface LibraryProps{
     children:React.ReactNode;
-    className?:String;
+    className?:string;
     songs:Song[];
 }
 
