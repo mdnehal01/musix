@@ -9,6 +9,7 @@ import { HiSpeakerWave, HiSpeakerXMark, HiOutlineSpeakerWave } from "react-icons
 import Slider from "./slider";
 import usePlayer from "@/hooks/usePlayer";
 import { useEffect, useState } from "react";
+// @ts-ignore
 import useSound from "use-sound";
 import PlayBar from "./playBar";
 
