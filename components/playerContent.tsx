@@ -217,7 +217,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         <div className="w-14 h-full flex justify-end pr-2">
           <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
         </div>
-        <PlayBar value={elapsedTime / audioRef.current?.duration || 0} onChange={handlePlaybarChange} />
+        {/* <PlayBar value={elapsedTime / audioRef.current?.duration || 0} onChange={handlePlaybarChange} /> */}
+        <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
+
         <div className="w-14 h-full flex justify-start pl-2">
           <p className="text-neutral-400 font-normal text-xs">{duration}</p>
         </div>
