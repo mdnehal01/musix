@@ -8,13 +8,11 @@ import Image from "next/image";
 interface PlayBarSongProps {
     data:Song;
     onClick?: (id:string) => void;
-    children?:HTMLDivElement;
 }
 
 const PlayBarSong:React.FC<PlayBarSongProps> = ({
     data,
-    onClick,
-    children
+    onClick
 }) => {
 
     const player = usePlayer();
@@ -81,7 +79,6 @@ const PlayBarSong:React.FC<PlayBarSongProps> = ({
                 </p>
                 
             </div>
-            {children}
         </div>
     );
 }
