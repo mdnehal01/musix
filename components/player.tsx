@@ -33,6 +33,7 @@ const Player:React.FC<PlayerProps> = ({
                 md:h-[125px]
                 h-[35%]
                 px-4
+                md:pt-0
                 pt-7
             `, className)}
         >

@@ -5,7 +5,7 @@
 import { Song } from "@/types";
 import PlayBarSong from "./playBarSong";
 import LikeButton from "./likeButton";
-import { BsPauseFill, BsPlayFill } from "react-icons/bs";
+import { BsOption, BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerWave, HiSpeakerXMark, HiOutlineSpeakerWave } from "react-icons/hi2";
 import Slider from "./slider";
@@ -16,6 +16,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import useSound from "use-sound";
 import PlayBar from "./playBar";
 import { BiRepeat, BiShuffle } from "react-icons/bi";
+import { Bars } from "react-loader-spinner";
 
 interface PlayerContentProps {
   song: Song;
@@ -36,6 +37,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const [elapsedTimeShow, setElapsedTimeShow] = useState<string>("0:00");
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isMuted, setIsMuted] = useState(false);
+  const [playLoadVisible, setPlayLoadVisible] = useState(true);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
@@ -92,12 +94,14 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       });
       audio.addEventListener("ended", () => {
         setIsPlaying(false);
+        setPlayLoadVisible(false);
         onPlayNext();
       });
 
       // Autoplay when audio is ready
       audio.play().then(() => {
         setIsPlaying(true);
+        setPlayLoadVisible(true);
       }).catch((error) => {
         console.error("Autoplay failed:", error);
       });
@@ -107,8 +111,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const handlePlay = () => {
     if (!isPlaying) {
       audioRef.current?.play();
+      setPlayLoadVisible(true);
     } else {
       audioRef.current?.pause();
+      setPlayLoadVisible(false);
     }
     setIsPlaying(!isPlaying);
   };
@@ -144,12 +150,14 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     if (isAudioPlaying) {
       audioRef.current.play();
       setIsPlaying(true);
+      setPlayLoadVisible(true);
     }
 
     // Restore the play state if it was paused before adjusting the volume
     if (wasPausedBefore) {
       audioRef.current.pause();
       setIsPlaying(false);
+      setPlayLoadVisible(false);
     }
   }
 }, [isPlaying, isMuted, songUrl]);
@@ -157,15 +165,31 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
   return (
     
-    <div className="w-full h-full flex flex-col items-center justify-end">
+    <div className="w-full h-full flex flex-col md:static relatice items-center justify-end">
 
-      <div id="LikeButton" className="absolute left-0 flex justify-center items-center p-4 -top-50% -translate-y-1/2 scale-125 mb-2">
+      <div className="absolute top-2 right-2">
+            <Bars
+                height="20"
+                width="30"
+                color="#F24171"
+                ariaLabel="bars-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={playLoadVisible}
+            />
+      </div>
+
+      <div id="LikeButton" className="hidden absolute left-0 md:flex justify-center items-center p-4 -top-50% -translate-y-1/2 scale-125 mb-2">
         <LikeButton songId={song.id} />
       </div>
 
       {/* Playbar for mobile and tabs */}
-      <div className="flex h-full justify-center md:hidden">
+      <div className="flex h-full justify-center w-full md:hidden relative">
             <PlayBarSong data={song} />
+
+            <div className="md:hidden absolute right-[18%] top-[24%] w-0 h-0 scale-125">
+              <LikeButton songId={song.id}/>
+            </div>
       </div>
 
       <div id="PlayBar" className="flex md:hidden w-full h-[30%] justify-center">
