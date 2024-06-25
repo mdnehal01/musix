@@ -31,8 +31,9 @@ const Player:React.FC<PlayerProps> = ({
                 w-full
                 py-2
                 md:h-[125px]
-                h-[50%]
+                h-[35%]
                 px-4
+                pt-7
             `, className)}
         >
             <PlayerContent

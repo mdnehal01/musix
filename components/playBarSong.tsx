@@ -32,18 +32,27 @@ const PlayBarSong:React.FC<PlayBarSongProps> = ({
             onClick={handleClick}
             className="
                 flex
+                md:flex-row
+                flex-col
+                items-center
                 cursor-pointer
                 w-full
                 md:gap-3
+                md:text-left
+                text-center
             "
         >
             {/* Image starts here */}
             <div 
                 className="
                     relative
-                    h-[65px]
-                    w-[65px]
+                    md:h-[65px]
+                    md:w-[65px]
+                    w-[100px]
+                    h-[100px]
                     overflow-hidden
+                    flex
+                    flex-shrink-0
                 "
             > 
                 <Image 

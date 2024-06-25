@@ -156,96 +156,39 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
 
   return (
-    // <div className="grid grid-cols-2 md:grid-cols-3 h-full relative">
-    //   <div className="flex w-full justify-start border-r-2">
-    //     <div className="flex items-center gap-x-4">
-    //       <MediaItem data={song} />
-    // 
-    //     </div>
-    //   </div>
-
-    //   {/* Mobile and medium screen's view */}
-    //   <div className="flex md:hidden col-auto w-full justify-end items-center border-r-2">
-    //     <AiFillStepBackward
-    //       size={30}
-    //       onClick={onPlayPrevious}
-    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-    //     />
-
-    //     <div
-    //       onClick={handlePlay}
-    //       className="h-10 w-10 flex items-center justify-center rounded-full bg-rose-500 hover:opacity-75 p-1 cursor-pointer"
-    //     >
-    //       <Icon size={30} className="text-black" />
-    //     </div>
-
-    //     <AiFillStepForward
-    //       size={30}
-    //       onClick={onPlayNext}
-    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-    //     />
-    //   </div>
-
-    //   {/* Desktop view */}
-    //   <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-6 border-r-0">
-    //     <AiFillStepBackward
-    //       size={30}
-    //       onClick={onPlayPrevious}
-    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-    //     />
-
-    //     <div
-    //       onClick={handlePlay}
-    //       className="flex items-center h-10 w-10 rounded-full bg-transparent hover:bg-white border-2 border-white p-1 cursor-pointer transition text-white hover:text-black"
-    //     >
-    //       <Icon size={30} />
-    //     </div>
-
-    //     <AiFillStepForward
-    //       size={30}
-    //       onClick={onPlayNext}
-    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-    //     />
-    //   </div>
-
-    //   <div className="hidden md:flex w-full justify-end pr-2 border-l-2">
-    //     <div className="flex items-center gap-x-2 w-[120px]">
-    //       <VolumeIcon onClick={toggleMute} className="cursor-pointer" size={24} />
-    //       <Slider value={volume} onChange={handleVolumeChange} />
-    //     </div>
-    //   </div>
-
-    //   {/* Music time slider */}
-    //   <div className="flex justify-between items-center w-full absolute bottom-0">
-    //     <div className="w-14 h-full flex justify-end pr-2">
-    //       <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
-    //     </div>
-    //     {/* <PlayBar value={elapsedTime / audioRef.current?.duration || 0} onChange={handlePlaybarChange} /> */}
-    //     <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
-
-    //     <div className="w-14 h-full flex justify-start pl-2">
-    //       <p className="text-neutral-400 font-normal text-xs">{duration}</p>
-    //     </div>
-    //   </div>
-
-    //   <audio ref={audioRef} preload="auto" />
-    // </div>
-
     
-
     <div className="w-full h-full flex flex-col items-center justify-end">
 
       <div id="LikeButton" className="absolute left-0 flex justify-center items-center p-4 -top-50% -translate-y-1/2 scale-125 mb-2">
         <LikeButton songId={song.id} />
       </div>
 
-      <div className="w-[92%] h-[60%] flex justify-between items-center relative">
+      {/* Playbar for mobile and tabs */}
+      <div className="flex h-full justify-center md:hidden">
+            <PlayBarSong data={song} />
+      </div>
 
-        <div className="flex h-full w-[20%] justify-start ">
+      <div id="PlayBar" className="flex md:hidden w-full h-[30%] justify-center">
+          <div className="h-full w-[5%] flex justify-end items-center">
+            <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
+          </div>
+          <div className="h-full w-[87%] flex items-center px-2">
+            <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
+          </div>
+          <div className="h-full w-[5%] flex justify-start items-center">
+            <p className="text-neutral-400 font-normal text-xs">{duration}</p>
+          </div>
+      </div>
+      {/* ....................... */}
+
+      <div className="w-[92%] h-[60%] flex md:flex-row flex-col justify-between items-center relative">
+
+        <div className="md:flex h-full w-[20%] justify-start hidden">
             <PlayBarSong data={song} />
         </div>
 
-        <div className="flex h-full w-[60%] justify-around items-center">
+
+        <div className="flex h-full md:w-[60%] w-full justify-around items-center">
 
           <div>
             <BiShuffle size={23}
@@ -287,7 +230,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         <div className="flex h-full w-[20%] items-center justify-between ">
           <div className="h-full w-2"></div>
 
-          <div className="w-[120px] h-full flex items-center gap-x-2">
+          <div className="w-[120px] h-full md:flex items-center gap-x-2 hidden">
             <VolumeIcon onClick={toggleMute} className="cursor-pointer text-[#e0a75e]" size={30} />
             <Slider value={volume} onChange={handleVolumeChange} />
           </div>
@@ -296,7 +239,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
       </div>
 
-      <div id="PlayBar" className="flex w-full h-[30%] justify-center">
+      {/* Playbar for Desktop */}
+      <div id="PlayBar" className="md:flex hidden w-full h-[30%] justify-center">
         <div className="h-full w-[5%] flex justify-end items-center">
           <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
         </div>
