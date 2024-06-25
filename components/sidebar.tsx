@@ -10,6 +10,7 @@ import Library from "./library";
 import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
 import { twMerge } from "tailwind-merge";
+import Player from "./player";
 
 interface SidebarProps{
     children:React.ReactNode;
@@ -40,12 +41,23 @@ const Sidebar:React.FC<SidebarProps> = ({children, songs}) => {
         <div className={twMerge(`
             flex
             h-full
-        `, 
-            player.activeId && "h-[calc(100%-80px)]"
+            overflow-hidden
+        `
         )}>
-            <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
-                <Box>
-                    <div className="flex flex-col gap-y-4 py-4 px-5 ">
+
+            {/* LEFT BAR */}
+            <div className="hidden md:flex flex-col bg-[#0f0f0f9f] h-full w-[350px]">
+
+                {/* LOGO */}
+                <Box className="bg-transparent mt-8 ml-6">
+                    <div>
+                        <img src="./images/LOGO.png" alt="logo" width={100} />
+                    </div>
+                </Box>
+
+                
+                <Box className="bg-transparent">
+                    <div className="flex flex-col gap-y-4 py-4 px-5">
                         {routes.map((item) => (
                             <Sidebaritem
                                 key={item.label}
@@ -54,13 +66,29 @@ const Sidebar:React.FC<SidebarProps> = ({children, songs}) => {
                         ))}
                     </div>
                 </Box>
-                <Box className="overflow-y-auto h-full">
+            </div>
+
+            {/*MAIN CONTENT */}
+            <div className="flex flex-col w-full h-full">
+                <main className={twMerge(`h-full flex-1 overflow-y-auto`,
+                    // When Playing music the Main body decreases
+                    player.activeId && "h-[calc(100%-80px)]"
+                )}>
+                    {children}
+                </main>
+                <Player/>
+            </div>
+
+
+            {/* Right Bar */}
+            <div className="hidden md:flex flex-col bg-[#0f0f0f9f] h-full w-[300px] ">
+
+                <Box className="overflow-y-auto h-full bg-transparent">
                     <Library songs={songs}>
                         {children}
                     </Library>
                 </Box>
             </div>
-            <main className="h-full flex-1 overflow-y-auto py-2">{children}</main>
         </div>
     );
 }

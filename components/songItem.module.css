@@ -1,0 +1,17 @@
+/* songItem.module.css */
+.hover-border-gradient {
+    position: absolute;
+    content: '';
+    border-radius: inherit;
+    background: linear-gradient(45deg, #4f46e5, #e453ed, #1ec7d3);
+    border: 2px solid transparent;
+    background-clip: padding-box; /* Prevents the gradient from extending outside the border */
+    z-index: -1; /* Ensure it stays behind the content */
+    opacity: 0; /* Initially invisible */
+    transition: opacity 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  .group:hover .hover-border-gradient {
+    opacity: 1; /* Show the gradient border on hover */
+  }
+  

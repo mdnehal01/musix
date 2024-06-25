@@ -1,0 +1,37 @@
+.scrollbar-custom {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #888888 transparent; /* Firefox */
+  }
+  
+  /* Webkit-based browsers (Chrome, Safari) */
+  .scrollbar-custom::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-thumb {
+    background-color: #a85656;
+    border-radius: 10px;
+    border: 2px solid transparent; /* Add padding around the thumb */
+    background-clip: padding-box; /* Prevents the background from being clipped by the border */
+  }
+  
+  .scrollbar-custom::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* Hide scrollbar buttons */
+  .scrollbar-custom::-webkit-scrollbar-button {
+    display: none;
+  }
+  
+
+.border-gradient {
+  position: absolute;
+  content: '';
+  border-radius: inherit;
+  background: linear-gradient(45deg, #4f46e5, #e453ed, #1ec7d3);
+  border: 2px solid transparent;
+  background-clip: padding-box; /* Prevents the gradient from extending outside the border */
+  z-index: -1; /* Ensure it stays behind the content */
+}

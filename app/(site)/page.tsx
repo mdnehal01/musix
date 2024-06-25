@@ -3,12 +3,20 @@ import Header from "@/components/header"
 import ListItem from "@/components/listItems";
 import PageContent from "./components/PageContent";
 
+
 export const revalidate = 0;
 
 export default async function Home() {
   const songs = await getSongs();
   return (
-    <div className="bg-neutral-900 rounded-lg h-full w-full overflow-hidden overflow-y-auto">
+    <div 
+      className="
+      bg-[#1f1e1e8c] 
+      h-full 
+      w-full 
+      overflow-hidden 
+      overflow-y-auto"
+    >
       <Header>
         <div className="mb-2">
           <h1 className="text-2xl font-semibold text-white">
@@ -35,7 +43,7 @@ export default async function Home() {
         </div> */}
 
         <PageContent songs={songs} />
-
+          
       </div>
     </div>
   );

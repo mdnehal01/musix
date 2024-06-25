@@ -3,9 +3,34 @@
 @tailwind utilities;
 
 
+
 html, body, 
 :root{
   height: 100%;
-  background-color: black;
+  background-image: linear-gradient(-45deg,#002E09,#001857,#600000);
   color-scheme: dark;
+}
+
+/* Hide scrollbar buttons for Webkit-based browsers (Chrome, Safari) */
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+/* Hide scrollbar buttons for Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #888888 transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #888888;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
 }

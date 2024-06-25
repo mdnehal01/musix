@@ -1,11 +1,19 @@
 "use client";
+// this component contains the player background just box
 
 import useGetSongById from "@/hooks/useGetSongById";
 import usePlayer from "@/hooks/usePlayer";
 import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import PlayerContent from "./playerContent";
+import { twMerge } from "tailwind-merge";
 
-const Player = () => {
+interface PlayerProps{
+    className?:string;
+}
+
+const Player:React.FC<PlayerProps> = ({
+    className
+}) => {
     const player = usePlayer();
     const { song } = useGetSongById(player.activeId);
 
@@ -17,15 +25,15 @@ const Player = () => {
 
     return (
         <div 
-            className="
-                fixed
-                bottom-0
-                bg-black
+            className={twMerge(`
+                bg-[#0F0F0F]/70
+                relative
                 w-full
                 py-2
-                h-[80px]
+                md:h-[125px]
+                h-[50%]
                 px-4
-            "
+            `, className)}
         >
             <PlayerContent
                 key={songUrl}

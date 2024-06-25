@@ -6,9 +6,13 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
+  theme: {},
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('tailwind-scrollbar-hide')
+  ],
+  variants: {
+    scrollbar: ['rounded']
+  }
 };
 export default config;

@@ -1,7 +1,9 @@
 "use client";
 
+// this is the actual player with play/pause button and forward and previous song
+
 import { Song } from "@/types";
-import MediaItem from "./mediaItem";
+import PlayBarSong from "./playBarSong";
 import LikeButton from "./likeButton";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
@@ -13,6 +15,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 // @ts-ignore
 import useSound from "use-sound";
 import PlayBar from "./playBar";
+import { BiRepeat, BiShuffle } from "react-icons/bi";
 
 interface PlayerContentProps {
   song: Song;
@@ -153,74 +156,154 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 h-full">
-      <div className="flex w-full justify-start">
-        <div className="flex items-center gap-x-4">
-          <MediaItem data={song} />
-          <LikeButton songId={song.id} />
-        </div>
+    // <div className="grid grid-cols-2 md:grid-cols-3 h-full relative">
+    //   <div className="flex w-full justify-start border-r-2">
+    //     <div className="flex items-center gap-x-4">
+    //       <MediaItem data={song} />
+    // 
+    //     </div>
+    //   </div>
+
+    //   {/* Mobile and medium screen's view */}
+    //   <div className="flex md:hidden col-auto w-full justify-end items-center border-r-2">
+    //     <AiFillStepBackward
+    //       size={30}
+    //       onClick={onPlayPrevious}
+    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
+    //     />
+
+    //     <div
+    //       onClick={handlePlay}
+    //       className="h-10 w-10 flex items-center justify-center rounded-full bg-rose-500 hover:opacity-75 p-1 cursor-pointer"
+    //     >
+    //       <Icon size={30} className="text-black" />
+    //     </div>
+
+    //     <AiFillStepForward
+    //       size={30}
+    //       onClick={onPlayNext}
+    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
+    //     />
+    //   </div>
+
+    //   {/* Desktop view */}
+    //   <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-6 border-r-0">
+    //     <AiFillStepBackward
+    //       size={30}
+    //       onClick={onPlayPrevious}
+    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
+    //     />
+
+    //     <div
+    //       onClick={handlePlay}
+    //       className="flex items-center h-10 w-10 rounded-full bg-transparent hover:bg-white border-2 border-white p-1 cursor-pointer transition text-white hover:text-black"
+    //     >
+    //       <Icon size={30} />
+    //     </div>
+
+    //     <AiFillStepForward
+    //       size={30}
+    //       onClick={onPlayNext}
+    //       className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
+    //     />
+    //   </div>
+
+    //   <div className="hidden md:flex w-full justify-end pr-2 border-l-2">
+    //     <div className="flex items-center gap-x-2 w-[120px]">
+    //       <VolumeIcon onClick={toggleMute} className="cursor-pointer" size={24} />
+    //       <Slider value={volume} onChange={handleVolumeChange} />
+    //     </div>
+    //   </div>
+
+    //   {/* Music time slider */}
+    //   <div className="flex justify-between items-center w-full absolute bottom-0">
+    //     <div className="w-14 h-full flex justify-end pr-2">
+    //       <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
+    //     </div>
+    //     {/* <PlayBar value={elapsedTime / audioRef.current?.duration || 0} onChange={handlePlaybarChange} /> */}
+    //     <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
+
+    //     <div className="w-14 h-full flex justify-start pl-2">
+    //       <p className="text-neutral-400 font-normal text-xs">{duration}</p>
+    //     </div>
+    //   </div>
+
+    //   <audio ref={audioRef} preload="auto" />
+    // </div>
+
+    
+
+    <div className="w-full h-full flex flex-col items-center justify-end">
+
+      <div id="LikeButton" className="absolute left-0 flex justify-center items-center p-4 -top-50% -translate-y-1/2 scale-125 mb-2">
+        <LikeButton songId={song.id} />
       </div>
 
-      {/* Mobile and medium screen's view */}
-      <div className="flex md:hidden col-auto w-full justify-end items-center">
-        <AiFillStepBackward
-          size={30}
-          onClick={onPlayPrevious}
-          className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-        />
+      <div className="w-[92%] h-[60%] flex justify-between items-center relative">
 
-        <div
-          onClick={handlePlay}
-          className="h-10 w-10 flex items-center justify-center rounded-full bg-rose-500 hover:opacity-75 p-1 cursor-pointer"
-        >
-          <Icon size={30} className="text-black" />
+        <div className="flex h-full w-[20%] justify-start ">
+            <PlayBarSong data={song} />
         </div>
 
-        <AiFillStepForward
-          size={30}
-          onClick={onPlayNext}
-          className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-        />
-      </div>
+        <div className="flex h-full w-[60%] justify-around items-center">
 
-      {/* Desktop view */}
-      <div className="hidden h-full md:flex justify-center items-center w-full max-w-[722px] gap-x-6">
-        <AiFillStepBackward
-          size={30}
-          onClick={onPlayPrevious}
-          className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-        />
+          <div>
+            <BiShuffle size={23}
+              onClick={() => {alert("Shuftle")}}
+              className="text-[#e0a75e] cursor-pointer hover:text-rose-500 transition"
+            />
+          </div>
 
-        <div
-          onClick={handlePlay}
-          className="flex items-center h-10 w-10 rounded-full bg-transparent hover:bg-white border-2 border-white p-1 cursor-pointer transition text-white hover:text-black"
-        >
-          <Icon size={30} />
+          <div className="flex gap-x-10 items-center ">
+            <AiFillStepBackward
+              size={30}
+              onClick={onPlayPrevious}
+              className="text-[#e0a75e] cursor-pointer hover:text-rose-500 transition"
+            />
+
+            <div
+              onClick={handlePlay}
+              className="flex items-center justify-center h-11 w-11 rounded-full hover:bg-rose-500 bg-[#E0A75E] p-1 cursor-pointer transition duration-200 text-black"
+            >
+              <Icon size={31} />
+            </div>
+
+            <AiFillStepForward
+              size={30}
+              onClick={onPlayNext}
+              className="text-[#e0a75e] cursor-pointer hover:text-rose-500 transition"
+            />
+          </div>
+
+          <div>
+            <BiRepeat size={23}
+              onClick={()=>{alert("Repeat")}}
+              className="text-[#e0a75e] cursor-pointer hover:text-rose-500 transition"
+            />
+          </div>
+
         </div>
 
-        <AiFillStepForward
-          size={30}
-          onClick={onPlayNext}
-          className="text-neutral-400 cursor-pointer hover:text-rose-500 transition"
-        />
-      </div>
+        <div className="flex h-full w-[20%] items-center justify-between ">
+          <div className="h-full w-2"></div>
 
-      <div className="hidden md:flex w-full justify-end pr-2">
-        <div className="flex items-center gap-x-2 w-[120px]">
-          <VolumeIcon onClick={toggleMute} className="cursor-pointer" size={24} />
-          <Slider value={volume} onChange={handleVolumeChange} />
+          <div className="w-[120px] h-full flex items-center gap-x-2">
+            <VolumeIcon onClick={toggleMute} className="cursor-pointer text-[#e0a75e]" size={30} />
+            <Slider value={volume} onChange={handleVolumeChange} />
+          </div>
+          
         </div>
+
       </div>
 
-      {/* Music time slider */}
-      <div className="w-5/6 h-1 absolute md:-top-2 -top-4 left-2/4 -translate-x-2/4 flex justify-between items-baseline">
-        <div className="w-14 h-full flex justify-end pr-2">
+      <div id="PlayBar" className="flex w-full h-[30%] justify-center">
+        <div className="h-full w-[5%] flex justify-end items-center">
           <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
         </div>
-        {/* <PlayBar value={elapsedTime / audioRef.current?.duration || 0} onChange={handlePlaybarChange} /> */}
-        <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
-
-        <div className="w-14 h-full flex justify-start pl-2">
+        <div className="h-full w-[87%] flex items-center px-2">
+          <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
+        </div>
+        <div className="h-full w-[5%] flex justify-start items-center">
           <p className="text-neutral-400 font-normal text-xs">{duration}</p>
         </div>
       </div>

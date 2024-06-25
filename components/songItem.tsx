@@ -3,6 +3,7 @@
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
 import Image from "next/image";
+import "./box.module.css";
 import PlayButton from "./playButton";
 import LikeButton from "./likeButton";
 
@@ -36,33 +37,35 @@ const SongItem:React.FC<SongItemProps> = ({
                 rounded-md
                 overflow-hidden
                 gap-x-4
-                bg-neutral-400/5
                 cursor-pointer
-                hover:bg-neutral-400/10
                 transition
-                p-2
+            
             "
-        >
-            <div 
-                className="
-                    relative
-                    aspect-square
-                    w-full
-                    h-full
-                    rounded-md
-                    overflow-hidden
-                "
-            >
-                <Image 
-                    className="object-cover"
-                    src={imagePath || '/images/liked.png'}
-                    fill
-                    alt="Image"
-                />
+        >   
+            <div className="p-[3px] w-full h-full rounded-md flex justify-center items-center bg-gradient-to-br from-[#F61111] via-[#0037c1] to-[#03A823] transition duration-200">
+                <div 
+                    className="
+                        relative
+                        aspect-square
+                        w-full
+                        h-full
+                        rounded-md
+                        overflow-hidden
+                        transition
+                        duration-200
+                    "
+                >
+                    <Image 
+                        className="object-cover"
+                        src={imagePath || '/images/liked.png'}
+                        fill
+                        alt="Image"
+                    />
+                </div>
             </div>
 
-            <div className="flex flex-col items-start w-full pt-4 gap-y-1">
-                <p className="font-semibold truncate w-full text-sm">
+            <div className="flex flex-col items-start w-full pt-2 gap-y-1">
+                <p className="font-normal truncate w-full text-sm">
                     {data.title}
                 </p>
                 <p className="text-neutral-400 pb-4 truncate w-full text-xs">
@@ -70,9 +73,9 @@ const SongItem:React.FC<SongItemProps> = ({
                 </p>
             </div>
 
-            <div className="absolute bottom-24 right-5">
+            {/* <div className="absolute bottom-24 right-5">
                 <PlayButton/>
-            </div>
+            </div> */}
 
         </div>
     )

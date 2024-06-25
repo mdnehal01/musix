@@ -1,6 +1,7 @@
 "use client";
 
 import * as RadixSlider from "@radix-ui/react-slider";
+import { FaDotCircle } from "react-icons/fa";
 
 interface PlayBarProps {
     value?: number;
@@ -19,14 +20,12 @@ const PlayBar: React.FC<PlayBarProps> = ({
     return (
         <RadixSlider.Root
             className="
-                relative
                 flex
                 items-center
                 select-none
                 touch-none
                 w-full
-                h-10
-                md:-top-1
+                h-3
             "
             defaultValue={[0]}
             value={[value]}
@@ -41,7 +40,7 @@ const PlayBar: React.FC<PlayBarProps> = ({
                     relative
                     grow
                     rounded-full
-                    h-[3px]
+                    h-[5px]
                     cursor-pointer
                 "
             >
@@ -52,7 +51,7 @@ const PlayBar: React.FC<PlayBarProps> = ({
                         rounded-full
                         h-full
                         cursor-pointer
-                    "
+                    "  
                 />
             </RadixSlider.Track>
         </RadixSlider.Root>

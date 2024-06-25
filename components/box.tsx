@@ -12,6 +12,9 @@ const Box:React.FC<BoxProps> = ({children, className}) => {
             rounded-lg
             h-fit
             w-full
+            scrollbar-thin
+            scrollbar-thumb-gray-800
+            scrollbar-track-transparent
         `, className
         )}>
             {children}
@@ -20,3 +23,5 @@ const Box:React.FC<BoxProps> = ({children, className}) => {
 }
 
 export default Box;
+
+
