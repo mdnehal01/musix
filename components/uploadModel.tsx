@@ -31,6 +31,9 @@ const UploadModel = () => {
             title: '',
             song: null,
             image: null,
+            genre:'',
+            release_date:'',
+            album:''
         }
     });
 
@@ -108,6 +111,9 @@ const UploadModel = () => {
                     author: values.author,
                     image_path: imageData.path,
                     song_path: songData.path,
+                    genre: values.genre,
+                    release_date: values.release_date,
+                    album: values.album,
                     duration: duration // include duration in the data
                 });
 
@@ -153,6 +159,27 @@ const UploadModel = () => {
                     {...register('author', { required: true })}
                     placeholder="Song author"
                 />
+
+                <Input
+                    id="genre"
+                    disabled={isLoading}
+                    {...register('genre', { required: true })}
+                    placeholder="Genre"
+                />
+
+                <Input
+                    id="release_date"
+                    disabled={isLoading}
+                    {...register('release_date', { required: true })}
+                    placeholder="Release Date"
+                />
+                <Input
+                    id="album"
+                    disabled={isLoading}
+                    {...register('album', { required: true })}
+                    placeholder="Album Name"
+                />
+                
 
                 <div>
                     <div className="pb-1">

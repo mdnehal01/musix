@@ -210,7 +210,6 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
   };
 
-
   const handleVolumeChange = useCallback((value: number) => {
   setVolume(value);
   if (audioRef.current) {
