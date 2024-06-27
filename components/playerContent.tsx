@@ -5,7 +5,7 @@
 import { Song } from "@/types";
 import PlayBarSong from "./playBarSong";
 import LikeButton from "./likeButton";
-import { BsOption, BsPauseFill, BsPlayFill } from "react-icons/bs";
+import { BsPauseFill, BsPlayFill } from "react-icons/bs";
 import { AiFillStepBackward, AiFillStepForward } from "react-icons/ai";
 import { HiSpeakerWave, HiSpeakerXMark, HiOutlineSpeakerWave } from "react-icons/hi2";
 import Slider from "./slider";
@@ -15,12 +15,17 @@ import { useEffect, useState, useRef, useCallback } from "react";
 // @ts-ignore
 import useSound from "use-sound";
 import PlayBar from "./playBar";
-import { BiRepeat, BiShuffle } from "react-icons/bi";
+import { BiDotsHorizontal, BiRepeat, BiShuffle } from "react-icons/bi";
 import { Bars } from "react-loader-spinner";
+import SongOption from "./SongOption";
 
 interface PlayerContentProps {
   song: Song;
   songUrl: string;
+  shuffle: boolean;
+  onToggleShuffle: () => void;
+  repeat:boolean;
+  onToggleRepeat: () => void;
 }
 
 const formatDuration = (duration: number): string => {
@@ -29,7 +34,14 @@ const formatDuration = (duration: number): string => {
   return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
 };
 
-const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
+const PlayerContent: React.FC<PlayerContentProps> = ({ 
+  song, 
+  songUrl,
+  shuffle,
+  onToggleShuffle, 
+  repeat, 
+  onToggleRepeat
+}) => {
   const player = usePlayer();
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -37,7 +49,15 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const [elapsedTimeShow, setElapsedTimeShow] = useState<string>("0:00");
   const [elapsedTime, setElapsedTime] = useState<number>(0);
   const [isMuted, setIsMuted] = useState(false);
+
   const [playLoadVisible, setPlayLoadVisible] = useState(true);
+
+  const [isDialogueOpen, setIsDialogueOpen] = useState(false);
+
+  const toggleDialogue = () => {
+    setIsDialogueOpen(!isDialogueOpen);
+  };
+
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
@@ -49,21 +69,50 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   } else {
     VolumeIcon = HiOutlineSpeakerWave;
   }
-
+  
   const onPlayNext = () => {
     if (player.ids.length === 0) {
       return;
     }
 
     const currentIndex = player.ids.findIndex((id) => id === player.activeId);
-    const nextSong = player.ids[currentIndex + 1];
 
-    if (!nextSong) {
-      return player.setId(player.ids[0]);
+    function getRandomSingleDigit() {
+      return Math.floor(Math.random() * player.ids.length); // Generates a random integer between 0 and 9
+    }
+    
+
+    if(shuffle){
+      const nextSong = player.ids[currentIndex + getRandomSingleDigit()];
+      if (!nextSong) {
+        return player.setId(player.ids[0]);
+      }
+  
+      player.setId(nextSong);
+
+    }
+    
+    else if(repeat){
+      const nextSong = player.ids[currentIndex];
+      if (!nextSong) {
+        return player.setId(player.ids[0]);
+      }
+  
+      player.setId(nextSong);
+
     }
 
-    player.setId(nextSong);
+    else{
+      const nextSong = player.ids[currentIndex + 1];
+      if (!nextSong) {
+        return player.setId(player.ids[0]);
+      }
+  
+      player.setId(nextSong);
+    }
+
   };
+
 
   const onPlayPrevious = () => {
     if (player.ids.length === 0) {
@@ -71,14 +120,43 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     }
 
     const currentIndex = player.ids.findIndex((id) => id === player.activeId);
-    const previousSong = player.ids[currentIndex - 1];
 
-    if (!previousSong) {
-      return player.setId(player.ids[player.ids.length - 1]);
+    function getRandomSingleDigit() {
+      return Math.floor(Math.random() * player.ids.length); // Generates a random integer between 0 and 9
+    }
+    
+
+    if(shuffle){
+      const nextSong = player.ids[currentIndex + getRandomSingleDigit()];
+      if (!nextSong) {
+        return player.setId(player.ids[0]);
+      }
+  
+      player.setId(nextSong);
+
+    }
+    
+    else if(repeat){
+      const nextSong = player.ids[currentIndex];
+      if (!nextSong) {
+        return player.setId(player.ids[0]);
+      }
+  
+      player.setId(nextSong);
+      
     }
 
-    player.setId(previousSong);
+    else{
+      const nextSong = player.ids[currentIndex - 1];
+      if (!nextSong) {
+        return player.setId(player.ids[0]);
+      }
+  
+      player.setId(nextSong);
+    }
+
   };
+
 
   useEffect(() => {
     if (audioRef.current) {
@@ -125,7 +203,6 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   }, []);
   
   
-  
 
   const handlePlaybarChange = (value: number) => {
     if (audioRef.current) {
@@ -165,9 +242,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
   return (
     
-    <div className="w-full h-full flex flex-col md:static relatice items-center justify-end">
+    <div className="w-full h-full flex flex-col md:static relative items-center justify-end">
 
-      <div className="absolute top-2 right-2">
+      <div className="absolute top-2 right-10">
             <Bars
                 height="20"
                 width="30"
@@ -216,8 +293,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
           <div>
             <BiShuffle size={23}
-              onClick={() => {alert("Shuftle")}}
-              className="text-[#e0a75e] cursor-pointer hover:text-rose-500 transition"
+              onClick={onToggleShuffle}
+              className={`cursor-pointer hover:text-rose-500 transition ${
+                shuffle ? 'text-rose-500' : 'text-[#e0a75e]'
+              }`}
             />
           </div>
 
@@ -244,8 +323,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
           <div>
             <BiRepeat size={23}
-              onClick={()=>{alert("Repeat")}}
-              className="text-[#e0a75e] cursor-pointer hover:text-rose-500 transition"
+              onClick={onToggleRepeat}
+              className={`cursor-pointer hover:text-rose-500 transition ${
+                repeat ? 'text-rose-500' : 'text-[#e0a75e]'
+              }`}
             />
           </div>
 
@@ -274,6 +355,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         <div className="h-full w-[5%] flex justify-start items-center">
           <p className="text-neutral-400 font-normal text-xs">{duration}</p>
         </div>
+      </div>
+      
+      <div className="absolute right-2 top-2">
+          <BiDotsHorizontal onClick={toggleDialogue} className="text-[#999999] hover:text-white cursor-pointer" />
+          {isDialogueOpen && <SongOption/>}
       </div>
 
       <audio ref={audioRef} preload="auto" />

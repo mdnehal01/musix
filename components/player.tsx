@@ -6,6 +6,7 @@ import usePlayer from "@/hooks/usePlayer";
 import useLoadSongUrl from "@/hooks/useLoadSongUrl";
 import PlayerContent from "./playerContent";
 import { twMerge } from "tailwind-merge";
+import { useState } from "react";
 
 interface PlayerProps{
     className?:string;
@@ -17,7 +18,19 @@ const Player:React.FC<PlayerProps> = ({
     const player = usePlayer();
     const { song } = useGetSongById(player.activeId);
 
+    const [shuffle, setShuffle] = useState(false);
+    const [repeat, setRepeat] = useState(false);
     const songUrl = useLoadSongUrl(song!);
+
+    const toggleShuffle = () => {
+        setShuffle((prevShuffle) => !prevShuffle);
+        setRepeat(false);
+    };
+
+    const toggleRepeat = () => {
+        setRepeat((prevRepeat) => !prevRepeat);
+        setShuffle(false);
+    }
 
     if(!song || !songUrl || !player.activeId) {
         return null;
@@ -41,6 +54,10 @@ const Player:React.FC<PlayerProps> = ({
                 key={songUrl}
                 song={song}
                 songUrl={songUrl}
+                shuffle={shuffle}
+                onToggleShuffle={toggleShuffle}
+                repeat={repeat}
+                onToggleRepeat={toggleRepeat}
             />
         </div>
     );

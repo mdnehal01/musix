@@ -12,6 +12,7 @@ import { useUser } from "@/hooks/useUser";
 import uniqid from "uniqid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
+import { parseBlob } from 'music-metadata-browser';
 
 const UploadModel = () => {
     const uploadModel = useUploadModel();
@@ -56,6 +57,10 @@ const UploadModel = () => {
             }
 
             const uniqueID = uniqid();
+
+            // Extract song duration
+            const metadata = await parseBlob(songFile);
+            const duration = metadata.format.duration; // duration in seconds
 
             // Upload song
             const {
@@ -102,7 +107,8 @@ const UploadModel = () => {
                     title: values.title,
                     author: values.author,
                     image_path: imageData.path,
-                    song_path: songData.path
+                    song_path: songData.path,
+                    duration: duration // include duration in the data
                 });
 
             if (supabaseError) {

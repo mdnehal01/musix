@@ -47,7 +47,7 @@ const Header:React.FC<HeaderProps> = ({children, className}) => {
                 <div className="w-full mb-4 flex items-center justify-between">
 
                     {/* Button for Forward and back in Desktop mode */}
-                    <div className="hidden md:flex gap-x-2 items-center">
+                    <div className="hidden lg:flex gap-x-2 items-center">
                         <button onClick={()=>{router.back()}} className="rounded-full bg-black items-center justify-center hover:opacity-75 transition">
                             <RxCaretLeft size={25}/>
                         </button>
@@ -57,7 +57,7 @@ const Header:React.FC<HeaderProps> = ({children, className}) => {
                     </div>
 
                     {/* Button for Home and Search in mobile mode */}
-                    <div className="flex md:hidden gap-x-2 items-center">
+                    <div className="flex lg:hidden gap-x-2 items-center">
                         <Link href="/">
                             <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition">
                                 <HiHome className="text-black" size={20}/>
