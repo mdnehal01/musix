@@ -8,6 +8,9 @@ export interface Song {
     title:string;
     song_path:string;
     image_path:string;
+    duration:string;
+    genre:string;
+    release_date:string;
 }
 
 export interface UserDetails{
