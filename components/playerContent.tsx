@@ -243,7 +243,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     
     <div className="w-full h-full flex flex-col md:static relative items-center justify-end">
 
-      <div className="absolute top-2 right-10">
+      <div className="absolute md:top-2 md:right-10">
             <Bars
                 height="20"
                 width="30"
@@ -255,7 +255,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             />
       </div>
 
-      <div id="LikeButton" className="hidden absolute left-0 md:flex justify-center items-center p-4 -top-50% -translate-y-1/2 scale-125 mb-2">
+      <div id="LikeButton" className="hidden absolute z-10 left-0 md:flex justify-center items-center p-4 -top-50% -translate-y-1/2 scale-125 mb-2">
         <LikeButton songId={song.id} />
       </div>
 
@@ -293,7 +293,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           <div>
             <BiShuffle size={23}
               onClick={onToggleShuffle}
-              className={`cursor-pointer hover:text-rose-500 transition ${
+              className={`cursor-pointer md:hover:text-rose-500 transition ${
                 shuffle ? 'text-rose-500' : 'text-[#e0a75e]'
               }`}
             />
@@ -323,7 +323,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           <div>
             <BiRepeat size={23}
               onClick={onToggleRepeat}
-              className={`cursor-pointer hover:text-rose-500 transition ${
+              className={`cursor-pointer md:hover:text-rose-500 transition ${
                 repeat ? 'text-rose-500' : 'text-[#e0a75e]'
               }`}
             />
@@ -356,7 +356,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         </div>
       </div>
       
-      <div className="absolute right-2 top-2">
+      <div className="absolute md:right-2 md:top-2 -top-5 right-0">
           <BiDotsHorizontal onClick={toggleDialogue} className="text-[#999999] hover:text-white cursor-pointer" />
           {isDialogueOpen && <SongOption/>}
       </div>

@@ -17,6 +17,10 @@ const MediaItem:React.FC<MediaItemProps> = ({
 
     const player = usePlayer();
     const imageUrl = useLoadImage(data);
+    const time = data.duration;
+    const min = Math.floor(parseInt(time)/60);
+    const sec = Math.floor(parseInt(time)%60);
+    const formatDuration = `${min}:${sec.toString().padStart(2, '0')}`;
 
     const handleClick = () => {
         if(onClick) {
@@ -61,20 +65,24 @@ const MediaItem:React.FC<MediaItemProps> = ({
 
             <div className="
                 flex
-                flex-col
+                flex-row
+                w-full
+                justify-between
                 gap-y-1
                 overflow-hidden
+                items-center
             ">
-
-                <p className="text-white text-sm truncate">
-                    {data.title}
-                </p>
-                <p className="text-neutral-400 text-xs truncate">
-                    {data.author}
-                </p>
+                <div className="flex flex-col">
+                    <p className="text-white text-sm truncate">
+                        {data.title}
+                    </p>
+                    <p className="text-neutral-400 text-xs truncate">
+                        {data.author}
+                    </p>
+                </div>
                 
+                <p className="text-[#999999] text-sm">{formatDuration}</p>
             </div>
-
         </div>
     );
 }

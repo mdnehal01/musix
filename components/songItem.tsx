@@ -4,13 +4,7 @@ import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
 import Image from "next/image";
 import "./box.module.css";
-import PlayButton from "./playButton";
-import LikeButton from "./likeButton";
 
-const smallText = {
-    fontSize:"10px",
-    textAlign:"left"
-}
 
 interface SongItemProps {
     data: Song;
@@ -22,7 +16,12 @@ const SongItem:React.FC<SongItemProps> = ({
     onClick
 }) => {
 
-    const imagePath = useLoadImage(data);
+    const imagePath = useLoadImage(data);{data.duration}
+    const time = data.duration;
+    const min = Math.floor(parseInt(time)/60);
+    const sec = Math.floor(parseInt(time)%60);
+    const formatDuration = `${min}:${sec.toString().padStart(2, '0')}`;
+    
 
     return (
         <div
@@ -56,7 +55,7 @@ const SongItem:React.FC<SongItemProps> = ({
                     "
                 >
                     <Image 
-                        className="object-cover"
+                        className="object-cover hover:scale-[1.15] hover: transition duration-200"
                         src={imagePath || '/images/liked.png'}
                         fill
                         alt="Image"
@@ -64,18 +63,17 @@ const SongItem:React.FC<SongItemProps> = ({
                 </div>
             </div>
 
-            <div className="flex flex-col items-start w-full pt-2 gap-y-1">
-                <p className="font-normal truncate w-full text-sm">
-                    {data.title}
-                </p>
-                <p className="text-neutral-400 pb-4 truncate w-full text-xs">
-                    {data.author}
-                </p>
+            <div className="flex items-start justify-between w-full pt-2 gap-y-1">
+                <div className="flex flex-col">
+                    <p className="font-normal truncate w-full text-sm">
+                        {data.title}
+                    </p>
+                    <p className="text-neutral-400 pb-4 truncate w-full text-xs">
+                        {data.author}
+                    </p>
+                </div>
+                <p className="text-[#999999] text-sm">{formatDuration}</p>
             </div>
-
-            {/* <div className="absolute bottom-24 right-5">
-                <PlayButton/>
-            </div> */}
 
         </div>
     )
