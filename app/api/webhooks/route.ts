@@ -60,6 +60,7 @@ export async function POST(
                     await manageSubscriptionStatusChange(
                         subscription.id,
                         subscription.customer as string,
+                        // @ts-ignore
                         event.type === 'customer.subscription.created'
                     );
                     break;
@@ -70,6 +71,7 @@ export async function POST(
                         await manageSubscriptionStatusChange(
                             subscriptionId as string,
                             checkoutSession.customer as string,
+                            // @ts-ignore
                             true
                         );
                     }

@@ -184,6 +184,7 @@ const manageSubscriptionStatusChange = async (
     subscriptionId: string,
     customerId: string,
     createAction: false
+    // createAction: boolean
 ) => {
     const { data: customerData, error: noCustomerError } = await supabaseAdmin
         .from('customers')
