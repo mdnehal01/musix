@@ -1,6 +1,7 @@
 "use client"
 import React, { useState } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 
 type Track = {
   name: string;
@@ -21,7 +22,8 @@ const NsearchComponent: React.FC = () => {
       });
       console.log('Search Results:', response.data);
       const tracks = response.data?.results?.trackmatches?.track || [];
-      alert(response.data.results)
+      // alert(response.data.results)
+      toast.success(response.data.results);
       setResults(tracks);
       setError('');
     } catch (error) {

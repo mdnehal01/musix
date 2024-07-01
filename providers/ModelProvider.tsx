@@ -4,8 +4,16 @@ import { useEffect, useState } from "react";
 
 import AuthModel from "@/components/authModel";
 import UploadModel from "@/components/uploadModel";
+import SubscribeModel from "@/components/subscribeModal";
+import { ProductWithPrice } from "@/types";
 
-const ModelProvider = () => {
+interface ModelProviderProps {
+    products: ProductWithPrice[];
+}
+
+const ModelProvider: React.FC<ModelProviderProps> = ({
+    products
+}) => {
 
     const [isMounted, setIsMounted] = useState(false);
 
@@ -21,6 +29,7 @@ const ModelProvider = () => {
         <>
             <AuthModel/>
             <UploadModel/>
+            <SubscribeModel products={products}/>
         </>
     );
 }

@@ -6,6 +6,7 @@ export interface Song {
     user_id:string;
     author:string;
     title:string;
+    album:string;
     song_path:string;
     image_path:string;
     duration:string;
@@ -25,7 +26,7 @@ export interface UserDetails{
 
 export interface Product{
     id:string;
-    active?:string;
+    active?:boolean;
     name?:string;
     description?: string;
     image?:string;
@@ -35,7 +36,7 @@ export interface Product{
 export interface Price{
     id:string;
     product_id?:string;
-    actice?:boolean;
+    active?:boolean;
     description?:string;
     unit_amount?:number;
     currency?:string;
@@ -45,6 +46,10 @@ export interface Price{
     trial_period_days?:number | null;
     metadata?:Stripe.Metadata;
     products?:Product;
+}
+
+export interface ProductWithPrice extends Product{
+    prices?: Price[];
 }
 
 export interface Subscription{
