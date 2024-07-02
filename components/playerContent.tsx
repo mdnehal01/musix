@@ -360,9 +360,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           <BiDotsHorizontal onClick={toggleDialogue} className="text-[#999999] hover:text-white cursor-pointer" />
           {isDialogueOpen && <SongOption
                                 songId={song.id}
-                                artist={song.author}
-                                album={song.album}
-                                title={song.title}
+                                // artist={song.author}
+                                // album={song.album}
+                                // title={song.title}
                               />
           }
       </div>
