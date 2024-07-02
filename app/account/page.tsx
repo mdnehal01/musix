@@ -1,5 +1,5 @@
 import Header from "@/components/header";
-import ListItem from "@/components/listItems";
+import AccountContent from "@/components/accountContent";
 
 const Account = () => {
   return (
@@ -18,18 +18,7 @@ const Account = () => {
           </h1>
         </div>
       </Header>
-
-      {/* <div className="mt-2 mb-7 px-6">
-        <div className="flex justify-between items-center">
-          <h1 className="text-white text-xl font-semibold">Newest Song</h1>
-        </div> */}
-
-        {/* list of songs */}
-        {/* <div>
-          {songs.map((song) => <div>{song.title}</div>)}
-        </div> */}
-{/*           
-      </div> */}
+      <AccountContent/>
     </div>
   );
 }

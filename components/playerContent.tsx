@@ -358,7 +358,13 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       
       <div className="absolute md:right-2 md:top-2 -top-5 right-0">
           <BiDotsHorizontal onClick={toggleDialogue} className="text-[#999999] hover:text-white cursor-pointer" />
-          {isDialogueOpen && <SongOption/>}
+          {isDialogueOpen && <SongOption
+                                songId={song.id}
+                                artist={song.author}
+                                album={song.album}
+                                title={song.title}
+                              />
+          }
       </div>
 
       <audio ref={audioRef} preload="auto" />
