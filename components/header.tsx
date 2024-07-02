@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
-import { BiMenu, BiSearch, BiAtom } from "react-icons/bi";
+import { BiMenu, BiSearch, BiAtom, BiHeart } from "react-icons/bi";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import useAuthModel from "@/hooks/useAuthModel";
 import { useUser } from "@/hooks/useUser";
@@ -48,6 +48,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 label: "Search",
                 active: pathName === "/search",
                 href: "/search",
+            },
+            {
+                icon: BiHeart,
+                label: "Favourites",
+                active: pathName === "/liked",
+                href: "/liked",
             },
             {
                 icon: MdOutlineExplore,
