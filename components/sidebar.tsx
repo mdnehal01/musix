@@ -14,6 +14,7 @@ import { MdOutlineExplore } from "react-icons/md";
 import { IoAlbumsOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 interface SidebarProps {
     children: React.ReactNode;
@@ -23,7 +24,7 @@ interface SidebarProps {
 const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
     const pathName = usePathname();
     const player = usePlayer();
-
+    const router = useRouter();
     const routes = useMemo(
         () => [
             {
@@ -78,7 +79,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
             <div className="hidden lg:flex flex-col justify-between flex-shrink-0 bg-[#0f0f0f9f] h-full w-[230px] p-2">
                 {/* LOGO */}
                 <Box className="bg-transparent mt-8 ml-3">
-                    <div>
+                    <div className="cursor-pointer"  onClick={()=>{router.push("/")}}>
                         <img src="./images/LOGO.png" alt="logo" width={100} />
                     </div>
                 </Box>

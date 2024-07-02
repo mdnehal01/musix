@@ -110,10 +110,13 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         `, className)}>
             {/* Header content */}
             <div className="w-full mb-4 flex items-center justify-between">
+
                 {/* LOGO IN MOBILE VIEW */}
-                <Box className="lg:hidden flex justify-start">
-                    <img src="./images/LOGO.png" alt="logo" width={100} className="mt-1"/>
-                </Box>
+                <div className="cursor-pointer" onClick={()=>{router.push("/")}}>
+                    <Box className="lg:hidden flex justify-start">
+                        <img src="./images/LOGO.png" alt="logo" width={100} className="mt-1"/>
+                    </Box>
+                </div>
 
                 {/* Buttons for Forward and back in Desktop mode */}
                 <div className="hidden lg:flex gap-x-2 items-center">
