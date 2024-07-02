@@ -4,6 +4,7 @@ import useLoadImage from "@/hooks/useLoadImage";
 import usePlayer from "@/hooks/usePlayer";
 import { Song } from "@/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface MediaItemDetailedProps {
     data:Song;
@@ -22,9 +23,11 @@ const MediaItemDetailed:React.FC<MediaItemDetailedProps> = ({
     const min = Math.floor(parseInt(time)/60);
     const sec = Math.floor(parseInt(time)%60);
     const formatDuration = `${min}:${sec.toString().padStart(2, '0')}`;
+    const router = useRouter();
 
     const handleClick = () => {
         if(onClick) {
+            router.push(`/track/${data.id}`);
             return onClick(data.id);
         }
 

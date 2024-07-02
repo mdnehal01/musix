@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { HiHome } from "react-icons/hi";
-import { BiAtom, BiPlayCircle, BiSearch } from "react-icons/bi";
+import { BiAtom, BiHeart, BiPlayCircle, BiSearch } from "react-icons/bi";
 import Box from "./box";
 import Sidebaritem from "./sidebaritems";
 import Library from "./library";
@@ -15,6 +15,7 @@ import { IoAlbumsOutline } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
+import { Hearts } from "react-loader-spinner";
 
 interface SidebarProps {
     children: React.ReactNode;
@@ -38,6 +39,12 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
                 label: "Search",
                 active: pathName === "/search",
                 href: "/search",
+            },
+            {
+                icon: BiHeart,
+                label: "Favourites",
+                active: pathName === "/liked",
+                href: "/liked",
             },
             {
                 icon: MdOutlineExplore,

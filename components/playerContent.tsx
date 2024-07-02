@@ -24,7 +24,7 @@ interface PlayerContentProps {
   songUrl: string;
   shuffle: boolean;
   onToggleShuffle: () => void;
-  repeat:boolean;
+  repeat: boolean;
   onToggleRepeat: () => void;
 }
 
@@ -54,11 +54,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
   const [isDialogueOpen, setIsDialogueOpen] = useState(false);
 
-  const toggleDialogue = () => {
-    setIsDialogueOpen(!isDialogueOpen);
-  };
-
   const audioRef = useRef<HTMLAudioElement>(null);
+  const dialogueRef = useRef<HTMLDivElement>(null);
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
   let VolumeIcon = HiSpeakerWave;
@@ -82,7 +79,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
     
 
-    if(shuffle){
+    if (shuffle) {
       const nextSong = player.ids[currentIndex + getRandomSingleDigit()];
       if (!nextSong) {
         return player.setId(player.ids[0]);
@@ -90,9 +87,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   
       player.setId(nextSong);
 
-    }
-    
-    else if(repeat){
+    } else if (repeat) {
       const nextSong = player.ids[currentIndex];
       if (!nextSong) {
         return player.setId(player.ids[0]);
@@ -100,9 +95,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   
       player.setId(nextSong);
 
-    }
-
-    else{
+    } else {
       const nextSong = player.ids[currentIndex + 1];
       if (!nextSong) {
         return player.setId(player.ids[0]);
@@ -112,7 +105,6 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
 
   };
-
 
   const onPlayPrevious = () => {
     if (player.ids.length === 0) {
@@ -124,9 +116,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     function getRandomSingleDigit() {
       return Math.floor(Math.random() * player.ids.length); // Generates a random integer between 0 and 9
     }
-    
 
-    if(shuffle){
+    if (shuffle) {
       const nextSong = player.ids[currentIndex + getRandomSingleDigit()];
       if (!nextSong) {
         return player.setId(player.ids[0]);
@@ -134,9 +125,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   
       player.setId(nextSong);
 
-    }
-    
-    else if(repeat){
+    } else if (repeat) {
       const nextSong = player.ids[currentIndex];
       if (!nextSong) {
         return player.setId(player.ids[0]);
@@ -144,9 +133,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   
       player.setId(nextSong);
       
-    }
-
-    else{
+    } else {
       const nextSong = player.ids[currentIndex - 1];
       if (!nextSong) {
         return player.setId(player.ids[0]);
@@ -156,7 +143,6 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
 
   };
-
 
   useEffect(() => {
     if (audioRef.current) {
@@ -197,12 +183,32 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     setIsPlaying(!isPlaying);
   };
 
+  const toggleDialogue = () => {
+    setIsDialogueOpen(!isDialogueOpen);
+  };
+
+  const handleClickOutside = useCallback((event: MouseEvent) => {
+    if (dialogueRef.current && !dialogueRef.current.contains(event.target as Node)) {
+      setIsDialogueOpen(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isDialogueOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDialogueOpen, handleClickOutside]);
+
   const toggleMute = useCallback(() => {
     setVolume((prevVolume) => (prevVolume === 0 ? 1 : 0));
     setIsMuted((prevMuted) => !prevMuted);
   }, []);
-  
-  
 
   const handlePlaybarChange = (value: number) => {
     if (audioRef.current) {
@@ -211,39 +217,38 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   };
 
   const handleVolumeChange = useCallback((value: number) => {
-  setVolume(value);
-  if (audioRef.current) {
-    audioRef.current.volume = isMuted ? 0 : value;
-    const currentTime = audioRef.current.currentTime;
-    const isAudioPlaying = !audioRef.current.paused;
-    const wasPausedBefore = !isPlaying;
+    setVolume(value);
+    if (audioRef.current) {
+      audioRef.current.volume = isMuted ? 0 : value;
+      const currentTime = audioRef.current.currentTime;
+      const isAudioPlaying = !audioRef.current.paused;
+      const wasPausedBefore = !isPlaying;
 
-    audioRef.current.src = songUrl;
-    audioRef.current.volume = isMuted ? 0 : value;
-    audioRef.current.currentTime = currentTime;
+      audioRef.current.src = songUrl;
+      audioRef.current.volume = isMuted ? 0 : value;
+      audioRef.current.currentTime = currentTime;
 
-    // Resume playing if it was playing before adjusting the volume
-    if (isAudioPlaying) {
-      audioRef.current.play();
-      setIsPlaying(true);
-      setPlayLoadVisible(true);
+      // Resume playing if it was playing before adjusting the volume
+      if (isAudioPlaying) {
+        audioRef.current.play();
+        setIsPlaying(true);
+        setPlayLoadVisible(true);
+      }
+
+      // Restore the play state if it was paused before adjusting the volume
+      if (wasPausedBefore) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        setPlayLoadVisible(false);
+      }
     }
-
-    // Restore the play state if it was paused before adjusting the volume
-    if (wasPausedBefore) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-      setPlayLoadVisible(false);
-    }
-  }
-}, [isPlaying, isMuted, songUrl]);
-
+  }, [isPlaying, isMuted, songUrl]);
 
   return (
     
     <div className="w-full h-full flex flex-col md:static relative items-center justify-end">
 
-      <div className="absolute md:top-2 md:right-10">
+      <div className="absolute md:top-2 md:right-10 max-md:left-[13%] max-md:top-[20%]">
             <Bars
                 height="20"
                 width="30"
@@ -358,13 +363,14 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       
       <div className="absolute md:right-2 md:top-2 -top-5 right-0">
           <BiDotsHorizontal onClick={toggleDialogue} className="text-[#999999] hover:text-white cursor-pointer" />
-          {isDialogueOpen && <SongOption
-                                songId={song.id}
-                                // artist={song.author}
-                                // album={song.album}
-                                // title={song.title}
-                              />
-          }
+          {isDialogueOpen && (
+          <div 
+            ref={dialogueRef} 
+            className="absolute flex-col gap-2 w-[150px] h-[150px] bg-neutral-600 rounded-lg text-white top-[-170px] right-[10%] md:flex p-2 z-30"
+          >
+            <SongOption songId={song.id} />
+          </div>
+        )}
       </div>
 
       <audio ref={audioRef} preload="auto" />

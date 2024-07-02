@@ -117,16 +117,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                         <img src="./images/LOGO.png" alt="logo" width={100} className="mt-1"/>
                     </Box>
                 </div>
-
-                {/* Buttons for Forward and back in Desktop mode */}
-                <div className="hidden lg:flex gap-x-2 items-center">
-                    <button onClick={() => router.back()} className="rounded-full bg-black items-center justify-center hover:opacity-75 transition">
-                        <RxCaretLeft size={25} />
-                    </button>
-                    <button onClick={() => router.forward()} className="rounded-full bg-black items-center justify-center hover:opacity-75 transition">
-                        <RxCaretRight size={25} />
-                    </button>
-                </div>
                 
                 {/* Buttons for login and Signup */}
                 <div className="hidden lg:flex justify-between items-center gap-x-4">
@@ -142,10 +132,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                         </div>
                     ) : (
                         <>
-                            <Button onClick={authModel.onOpen} className="bg-transparent text-neutral-300 font-medium transition">
+                            <Button onClick={authModel.onOpen} className="bg-transparent w-26 text-neutral-300 font-medium transition">
                                 Sign up
                             </Button>
-                            <Button onClick={authModel.onOpen} className="bg-white px-6 py-2 hover:scale-105 transition">
+                            <Button onClick={authModel.onOpen} className="bg-white w-30 px-6 py-2 hover:scale-105 transition">
                                 Log in
                             </Button>
                         </>
