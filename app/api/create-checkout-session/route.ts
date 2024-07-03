@@ -42,8 +42,8 @@ export async function POST(
                 trial_from_plan: true,
                 metadata
             },
-            success_url: `${getURL()}/account`,
-            cancel_url: `${getURL()}`
+            success_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/account`,
+            cancel_url: `${process.env.NEXT_PUBLIC_VERCEL_URL}`
         });
 
         console.log(session.id);
