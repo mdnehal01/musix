@@ -50,6 +50,7 @@ const Player:React.FC<PlayerProps> = ({
                 pt-7
             `, className)}
         >
+            
             <PlayerContent
                 key={songUrl}
                 song={song}

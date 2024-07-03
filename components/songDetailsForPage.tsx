@@ -1,5 +1,7 @@
 "use client";
 
+// USED by page.tsx of track/[slug]/page.tsx
+
 import useLoadImage from "@/hooks/useLoadImage";
 import usePlayer from "@/hooks/usePlayer";
 import { Song } from "@/types";
@@ -7,7 +9,7 @@ import Image from "next/image";
 import Button from "./button";
 import { FaPause, FaPlay } from "react-icons/fa";
 import { useRef, useState, useEffect } from "react";
-import { TailSpin } from "react-loader-spinner";
+import { Bars } from "react-loader-spinner";
 
 interface SongDetailsForPageProps {
   data: Song;
@@ -72,7 +74,7 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
     >
       {!isImageLoaded && (
         <div className="absolute inset-0 flex justify-center items-center bg-black/10">
-          <TailSpin color="#00BFFF" height={80} width={80} />
+          <Bars color="#00BFFF" height={80} width={80} />
         </div>
       )}
 

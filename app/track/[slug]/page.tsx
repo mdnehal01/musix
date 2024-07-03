@@ -5,6 +5,7 @@ import Header from "@/components/header";
 import LikeButton from "@/components/likeButton";
 import Button from "@/components/button";
 import ListItem from "@/components/listItems";
+import { BiShare, BiShareAlt } from "react-icons/bi";
 
 interface SongPageProps {
   params: {
@@ -39,14 +40,16 @@ const SongPage = async ({ params }: SongPageProps) => {
           songUrl={song.song_path}
         />
       </Header>
+
       <div className="flex px-6 -mt-4 justify-between items-center">
         <div className="flex flex-col"> 
           <h1 className="font-extrabold text-6xl">{song.title}</h1>
           <p className="font-semibold text-2xl text-[#999999]">{song.author}</p>
         </div>
         
-        <div className="scale-150 flex items-center h-full">
-          <LikeButton songId={song.id} />
+        <div className="flex justify-between items-center gap-10 h-full">
+          <BiShareAlt className="cursor-pointer" size={30}/>
+          <LikeButton classname="scale-150" songId={song.id} />
         </div>
       </div>
       <div className="px-6 mt-4">

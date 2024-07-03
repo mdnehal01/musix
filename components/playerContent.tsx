@@ -11,11 +11,12 @@ import { HiSpeakerWave, HiSpeakerXMark, HiOutlineSpeakerWave } from "react-icons
 import Slider from "./slider";
 import usePlayer from "@/hooks/usePlayer";
 import { useEffect, useState, useRef, useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 // @ts-ignore
 import useSound from "use-sound";
 import PlayBar from "./playBar";
-import { BiDotsHorizontal, BiRepeat, BiShuffle } from "react-icons/bi";
+import { BiCaretUp, BiDotsHorizontal, BiRepeat, BiShuffle } from "react-icons/bi";
 import { Bars } from "react-loader-spinner";
 import SongOption from "./SongOption";
 
@@ -42,6 +43,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   repeat, 
   onToggleRepeat
 }) => {
+  const router = useRouter();
   const player = usePlayer();
   const [volume, setVolume] = useState(1);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -244,11 +246,15 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
   }, [isPlaying, isMuted, songUrl]);
 
+  const handleViewDetails = () => {
+    router.push(`/track/${song.id}`);
+  };
+
   return (
     
     <div className="w-full h-full flex flex-col md:static relative items-center justify-end">
 
-      <div className="absolute md:top-2 md:right-10 max-md:left-[13%] max-md:top-[20%]">
+      <div className="absolute md:top-2 md:right-16 max-md:left-[13%] max-md:top-[20%]">
             <Bars
                 height="20"
                 width="30"
@@ -371,6 +377,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             <SongOption songId={song.id} />
           </div>
         )}
+      </div>
+
+      <div className="absolute md:right-9 md:top-2 -top-5 right-6">
+        <BiCaretUp onClick={handleViewDetails} className="text-[#999999] hover:text-white cursor-pointer"/>
       </div>
 
       <audio ref={audioRef} preload="auto" />
