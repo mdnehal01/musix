@@ -1,7 +1,7 @@
 // In this file there is payment method option which can be card etc
 
 import { createRouteHandlerClient } from "@supabase/auth-helpers-nextjs"
-import { headers, cookies } from "next/headers"
+import { cookies } from "next/headers"
 import { NextResponse } from "next/server";
 
 import { stripe } from "@/libs/stripe";
@@ -25,7 +25,7 @@ export async function POST(
             email: user?.email || ''
         });
 
-    
+        // @ts-ignore
         const session = await stripe.checkout.sessions.create({
             payment_method_types: ["card"],
             billing_address_collection: 'required',
@@ -39,12 +39,14 @@ export async function POST(
             mode: 'subscription',
             allow_promotion_codes: true,
             subscription_data: {
-                // trial_from_plan: true,
+                trial_from_plan: true,
                 metadata
             },
             success_url: `${getURL()}/account`,
             cancel_url: `${getURL()}`
         });
+
+        console.log(session.id);
 
         return NextResponse.json({
             sessionId: session.id

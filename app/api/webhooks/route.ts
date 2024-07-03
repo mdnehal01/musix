@@ -9,7 +9,7 @@ import {
     upsertPriceRecord,
     manageSubscriptionStatusChange
 } from "@/libs/supabaseAdmin";
-import toast from "react-hot-toast";
+
 
 const relevantEvents = new Set([
     'product.created',
@@ -37,8 +37,6 @@ export async function POST(
         event = stripe.webhooks.constructEvent(body, sig, webhookSecret);
     } catch(error: any) {
         console.log('Error Message: '+ error.message);
-        // alert(error.message)
-        toast.error(error.message);
         return new NextResponse(`Webhook Error: ${error.message}`, {status:400});
     }
 
@@ -81,7 +79,7 @@ export async function POST(
             }
         } catch (error) {
             console.log(error);
-            return new NextResponse('Webhook error', {status: 400});
+            return new NextResponse('Webhook errorM', {status: 400});
         }
     }
 
