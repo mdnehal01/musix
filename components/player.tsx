@@ -39,7 +39,7 @@ const Player:React.FC<PlayerProps> = ({
     return (
         <div 
             className={twMerge(`
-                bg-[#0F0F0F]/70
+                bg-[#0F0F0F]/80
                 relative
                 w-full
                 py-2

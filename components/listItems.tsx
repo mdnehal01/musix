@@ -6,6 +6,8 @@ import { twMerge } from "tailwind-merge";
 import { useRouter } from "next/navigation";
 import { FaPlay } from "react-icons/fa";
 import Image from "next/image";
+import { useUser } from "@/hooks/useUser";
+import useAuthModel from "@/hooks/useAuthModel";
 
 interface ListItemProps{
     image:string;
@@ -16,8 +18,14 @@ interface ListItemProps{
 const ListItem:React.FC<ListItemProps> = ({image, name, href}) => {
 
     const router = useRouter();
+    const { user } = useUser();
+    const authModel = useAuthModel();
     const onClick = () => {
         // Add auth before push
+        if(!user){
+            return authModel.onOpen();
+        }
+
         router.push(href)
     }
 

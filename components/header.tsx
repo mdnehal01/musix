@@ -1,13 +1,12 @@
 'use client'
 // Import necessary modules and components
 import { useMemo } from "react";
-import { MdOutlineExplore } from "react-icons/md";
+import { MdCreate, MdOutlineExplore } from "react-icons/md";
 import { IoAlbumsOutline } from "react-icons/io5";
 import { CgClose, CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import Button from "./button";
 import { useRouter } from "next/navigation";
-import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { HiHome } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 import { BiMenu, BiSearch, BiAtom, BiHeart } from "react-icons/bi";
@@ -21,6 +20,7 @@ import { MdMenu } from "react-icons/md";
 import { useState } from "react";
 import Box from "./box";
 import Sidebaritem from "./sidebaritems";
+import { LuLogIn, LuLogOut } from "react-icons/lu";
 
 
 // Define the HeaderProps interface
@@ -126,26 +126,15 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 
                 {/* Buttons for login and Signup */}
                 <div className="hidden lg:flex justify-between items-center gap-x-4">
-                    {/* Logout and user profile buttons */}
-                    {user ? (
-                        <div className="flex gap-x-4 items-center">
-                            <Button onClick={handleLogout} className="bg-white px-6 py-2 rounded-full">
-                                Logout
-                            </Button>
-                            <Button onClick={() => router.push('/account')} className="bg-white h-10 w-10 justify-center items-center">
-                                <FaUserAlt />
-                            </Button>
-                        </div>
-                    ) : (
-                        <>
-                            <Button onClick={authModel.onOpen} className="bg-transparent w-26 text-neutral-300 font-medium transition">
-                                Sign up
-                            </Button>
-                            <Button onClick={authModel.onOpen} className="bg-white w-30 px-6 py-2 hover:scale-105 transition">
-                                Log in
-                            </Button>
-                        </>
-                    )}
+                   {user ? (
+                    <Button onClick={() => router.push('/account')} className="bg-white h-10 w-10 justify-center items-center">
+                        <FaUserAlt />
+                    </Button>
+                   ) : (
+                    <></>
+                   ) } 
+                    
+        
                 </div>
                 
                 {/* Button for Home and Search in mobile mode */}
@@ -164,6 +153,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 h-full
                 bg-[#0f0f0f]
                 w-4/5
+                md:w-1/2
                 p-2
                 transform
                 transition-transform
@@ -171,6 +161,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 ease-in-out
                 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
             `)}>
+
+                {/* Close Btn */}
+                {/* <CgClose className="absolute top-5 right-5 cursor-pointer" size={25} onClick={toggleSidebar}/> */}
+
                 {/* Sidebar content */}
                 <div className="flex flex-col justify-between h-full">
                     {/* Sidebar items */}
@@ -181,13 +175,40 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     </div>
                 </Box>
 
-                <Box className="bg-gradient-to-r from-[#0F0D0C]/15 to-[#5F5D5D]/15 rounded-none h-[80%] relative">
+                <Box className="bg-gradient-to-r from-[#0F0D0C]/15 to-[#5F5D5D]/15 rounded-none h-[80%] mt-10 relative">
                     <p className="text-[#999999] ml-6 absolute -top-5">Menu</p>
                     <div className="flex flex-col pl-12 py-3 gap-y-3">
                         {routes.map((item) => (
                             <Sidebaritem key={item.label} {...item} />
                         ))}
                     </div>
+                </Box>
+
+                <Box className="w-full rounded-none relative">
+                    {/* Buttons for login and Signup */}
+                    <div className="flex justify-between items-center gap-x-4">
+                    {/* Logout and user profile buttons */}
+                        {user ? (
+                            <div className="flex w-full flex-col p-5 gap-y-3">
+                                <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <FaUserAlt size={13}/> 
+                                    <p>Account</p>
+                                </div>
+                                <div onClick={handleLogout} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <LuLogOut/> Logout
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="flex w-full flex-col p-5 gap-y-3">
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <MdCreate/> Sign up
+                                </div>
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <LuLogIn/>Log in
+                                </div>
+                            </div>
+                        )}
+                </div>
                 </Box>
                 </div>
             </div>

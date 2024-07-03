@@ -10,6 +10,8 @@ import Button from "./button";
 import { FaPause, FaPlay } from "react-icons/fa";
 import { useRef, useState, useEffect } from "react";
 import { Bars } from "react-loader-spinner";
+import { useUser } from "@/hooks/useUser";
+import useAuthModel from "@/hooks/useAuthModel";
 
 interface SongDetailsForPageProps {
   data: Song;
@@ -34,7 +36,8 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
   const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   const PlayPauseIcon = !isPlaying ? FaPlay : FaPause;
-
+  const { user } = useUser()
+  const authModel = useAuthModel();
   const audioRef = useRef<HTMLAudioElement>(null);
 
   useEffect(() => {
@@ -44,6 +47,9 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
   }, [songUrl]);
 
   const handleClickPlay = () => {
+    if(!user){
+      return authModel.onOpen();
+    } else{
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
@@ -53,6 +59,7 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
       setIsPlaying(!isPlaying);
       player.setId(data.id);
     }
+  }
   };
 
   return (

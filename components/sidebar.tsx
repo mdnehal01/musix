@@ -2,7 +2,7 @@
 
 import { useMemo } from "react";
 import { HiHome } from "react-icons/hi";
-import { BiAtom, BiHeart, BiPlayCircle, BiSearch } from "react-icons/bi";
+import { BiAtom, BiHeart, BiLogIn, BiPlayCircle, BiSearch } from "react-icons/bi";
 import Box from "./box";
 import Sidebaritem from "./sidebaritems";
 import Library from "./library";
@@ -10,12 +10,18 @@ import { Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
 import { twMerge } from "tailwind-merge";
 import Player from "./player";
-import { MdOutlineExplore } from "react-icons/md";
-import { IoAlbumsOutline } from "react-icons/io5";
+import { MdCreate, MdOutlineExplore } from "react-icons/md";
+import { IoAlbumsOutline, IoCreate } from "react-icons/io5";
 import { CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
-import { Hearts } from "react-loader-spinner";
+import { useUser } from "@/hooks/useUser";
+import Button from "./button";
+import { FaUserAlt } from "react-icons/fa";
+import useAuthModel from "@/hooks/useAuthModel";
+import toast from "react-hot-toast";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { LuLogIn, LuLogOut } from "react-icons/lu";
 
 interface SidebarProps {
     children: React.ReactNode;
@@ -26,6 +32,22 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
     const pathName = usePathname();
     const player = usePlayer();
     const router = useRouter();
+    const authModel = useAuthModel(); // Auth model hook
+    const { user } = useUser();
+    const supabaseClient = useSupabaseClient();
+
+        // Function to handle logout
+    const handleLogout = async () => {
+        const { error } = await supabaseClient.auth.signOut();
+            router.refresh(); // Refresh router after logout
+    
+            if (error) {
+                toast.error(error.message); // Show error message if logout fails
+            } else {
+                toast.success('Logged out!'); // Show success message on logout
+            }
+    };
+
     const routes = useMemo(
         () => [
             {
@@ -91,13 +113,39 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
                     </div>
                 </Box>
 
-                <Box className="bg-gradient-to-r from-[#0F0D0C]/15 to-[#5F5D5D]/15 rounded-none h-[80%] relative">
+                <Box className="bg-gradient-to-r from-[#0F0D0C]/15 to-[#5F5D5D]/15 rounded-none h-[80%] mt-20 relative">
                     <p className="text-[#999999] ml-6 absolute -top-5">Menu</p>
                     <div className="flex flex-col pl-12 py-3 gap-y-3">
                         {routes.map((item) => (
                             <Sidebaritem key={item.label} {...item} />
                         ))}
                     </div>
+                </Box>
+                <Box className="w-full rounded-none relative">
+                    {/* Buttons for login and Signup */}
+                    <div className="flex justify-between items-center gap-x-4">
+                    {/* Logout and user profile buttons */}
+                        {user ? (
+                            <div className="flex w-full flex-col p-5 gap-y-3">
+                                <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <FaUserAlt size={13}/> 
+                                    <p>Account</p>
+                                </div>
+                                <div onClick={handleLogout} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <LuLogOut/> Logout
+                                </div>
+                            </div>
+                        ) : (
+                            <div className="flex w-full flex-col p-5 gap-y-3">
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <MdCreate/> Sign up
+                                </div>
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                    <LuLogIn/>Log in
+                                </div>
+                            </div>
+                        )}
+                </div>
                 </Box>
             </div>
 

@@ -9,7 +9,6 @@ interface ModelProps {
     children: React.ReactNode;
 }
 
-
 const Model: React.FC<ModelProps> = ({
     isOpen,
     onChange,
@@ -29,6 +28,7 @@ const Model: React.FC<ModelProps> = ({
                     backdrop-blur-sm
                     fixed
                     inset-0
+                    z-50
                 " 
                 />
                 <Dialog.Content
@@ -52,6 +52,7 @@ const Model: React.FC<ModelProps> = ({
                         bg-neutral-800
                         p-[25px]
                         focus:outline-none
+                        z-50
                     "
                 >
                     {/* the box after blur */}
@@ -86,9 +87,7 @@ const Model: React.FC<ModelProps> = ({
                         </button>
                     </Dialog.Close>
                 </Dialog.Content>
-                
             </Dialog.Portal>
-            
         </Dialog.Root>
     );
 }
