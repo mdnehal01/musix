@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Button from "./button";
+import ListItem from "./listItems";
 
 interface AccountContentProps{
 
@@ -43,7 +44,7 @@ const AccountContent: React.FC<AccountContentProps> = (
     }
 
     return(
-        <div className="mb-7 px-6">
+        <div className="mb-7 px-6 flex flex-col gap-y-10">
             {!subscription && (
                 <div className="flex flex-col gap-y-4">
                     <p>
@@ -71,6 +72,16 @@ const AccountContent: React.FC<AccountContentProps> = (
                     </Button>
                 </div>
             )}
+
+            <div className="flex flex-nowrap w-full">
+                <ListItem
+                    classname="h-32 lg:w-1/3 sm:w-1/2 w-full"
+                    image="/images/liked.png"
+                    name="Liked Songs"
+                    href="liked"
+                />
+            </div>
+       
         </div>
     )
 }

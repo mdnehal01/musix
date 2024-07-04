@@ -8,14 +8,16 @@ import { FaPlay } from "react-icons/fa";
 import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import useAuthModel from "@/hooks/useAuthModel";
+import { RxCountdownTimer } from "react-icons/rx";
 
 interface ListItemProps{
     image:string;
     name:string;
     href:string;
+    classname?:string;
 }
 
-const ListItem:React.FC<ListItemProps> = ({image, name, href}) => {
+const ListItem:React.FC<ListItemProps> = ({image, name, href, classname}) => {
 
     const router = useRouter();
     const { user } = useUser();
@@ -32,8 +34,20 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href}) => {
     return(
         <button
         onClick={onClick}
-        className="relative group flex items-center rounded-md overflow-hidden gap-x-4 bg-neutral-100/10 hover:bg-neutral-100/20 transition pr-4">
-            <div className="relative min-h-[64px] min-w-[64px]">
+        className={twMerge(`
+            relative
+            group 
+            flex 
+            items-center 
+            rounded-md 
+            overflow-hidden 
+            gap-x-4 
+            bg-neutral-100/10 
+            hover:bg-neutral-100/20 
+            transition 
+            pr-4
+        `, classname)}>
+            <div className="relative min-h-full min-w-[50%]">
                 <Image 
                     className="object-cover " 
                     fill
@@ -43,7 +57,7 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href}) => {
             </div>
             <p className="truncate font-medium py-5">{name}</p>
             <div 
-                onClick={onClick}
+
                 className="
                     absolute 
                     transition 
@@ -57,9 +71,10 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href}) => {
                     drop-shadow-md 
                     right-5 
                     group-hover:opacity-100 
-                    hover:scale-110"
-            >
-                <FaPlay className="text-black"/>
+                    hover:scale-110
+                "
+            >  
+                SongCount 
             </div>
         </button>
     );

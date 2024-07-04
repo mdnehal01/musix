@@ -1,5 +1,6 @@
 import Header from "@/components/header";
 import AccountContent from "@/components/accountContent";
+import ListItem from "@/components/listItems";
 
 const Account = () => {
   return (

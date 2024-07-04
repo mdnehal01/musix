@@ -79,11 +79,11 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
         relative
       "
     >
-      {!isImageLoaded && (
+      {/* {!isImageLoaded && (
         <div className="absolute inset-0 flex justify-center items-center bg-black/10">
           <Bars color="#00BFFF" height={80} width={80} />
         </div>
-      )}
+      )} */}
 
       <Image
         src={imageUrl || "/images/liked.png"}
@@ -91,7 +91,7 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
         layout="fill"
         className="object-cover z-0"
         onLoadingComplete={() => setIsImageLoaded(true)}
-        style={{ display: isImageLoaded ? "block" : "none" }}
+        // style={{ display: isImageLoaded ? "block" : "none" }}
       />
 
       <div
