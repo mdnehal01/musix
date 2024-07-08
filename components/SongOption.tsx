@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { FaWhatsapp, FaFacebook, FaTwitter, FaCopy } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaCopy } from "react-icons/fa";
 import { ImWhatsapp } from "react-icons/im";
 import { WhatsappShareButton, FacebookShareButton, TwitterShareButton } from "react-share";
 

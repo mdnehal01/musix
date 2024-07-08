@@ -14,9 +14,10 @@ import { useRouter } from "next/navigation";
 import shaka from "shaka-player";
 
 import PlayBar from "./playBar";
-import { BiCaretUp, BiDotsHorizontal, BiRepeat, BiShuffle } from "react-icons/bi";
+import { BiCaretUp, BiDotsHorizontal, BiMinus, BiRepeat, BiShuffle } from "react-icons/bi";
 import { Bars } from "react-loader-spinner";
 import SongOption from "./SongOption";
+import { twMerge } from "tailwind-merge";
 
 interface PlayerContentProps {
   song: Song;
@@ -25,6 +26,9 @@ interface PlayerContentProps {
   onToggleShuffle: () => void;
   repeat: boolean;
   onToggleRepeat: () => void;
+  onFullScreen: () => void;
+  onMinimize: () => void;
+  classname?:string;
 }
 
 const formatDuration = (duration: number): string => {
@@ -39,7 +43,10 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   shuffle,
   onToggleShuffle, 
   repeat, 
-  onToggleRepeat
+  onToggleRepeat,
+  onFullScreen,
+  onMinimize,
+  classname
 }) => {
   const router = useRouter();
   const player = usePlayer();
@@ -251,15 +258,12 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
   }, [isPlaying, isMuted]);
 
-  const handleViewDetails = () => {
-    router.push(`/track/${song.id}`);
-  };
 
   return (
     
-    <div className="w-full h-full flex flex-col md:static relative items-center justify-end">
+    <div className={twMerge(`w-full h-full flex flex-col md:static relative items-center justify-end`, classname)}>
 
-      <div className="absolute md:top-2 md:right-16 max-md:left-[13%] max-md:top-[20%]">
+      <div className="absolute md:top-2 md:right-[90px] max-md:left-[13%] max-md:top-[20%]">
             <Bars
                 height="20"
                 width="30"
@@ -385,7 +389,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       </div>
 
       <div className="absolute md:right-9 md:top-2 -top-5 right-6">
-        <BiCaretUp onClick={handleViewDetails} className="text-[#999999] hover:text-white cursor-pointer"/>
+        <BiCaretUp onClick={()=>{onFullScreen();}} className="text-[#999999] hover:text-white cursor-pointer"/>
+      </div>
+
+      <div className="absolute md:right-16 md:top-2 -top-5 right-12">
+        <BiMinus onClick={()=>{onMinimize();}} className="text-[#999999] hover:text-white cursor-pointer"/>
       </div>
 
       <audio ref={audioRef}/>

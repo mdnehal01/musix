@@ -6,7 +6,14 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  theme: {},
+  theme: {
+    extend: {
+      animation: {
+        'spin-slow': 'spin 5s linear infinite',
+        'spin-fast': 'spin 0.5s linear infinite',
+      },
+    },
+  },
   plugins: [
     require('tailwind-scrollbar'),
     require('tailwind-scrollbar-hide')
