@@ -86,7 +86,7 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
             <div className="p-6">
                 {songs.length > 0 ? (
                     songs.map((song) => (
-                        <MediaItemDetailed data={song} />
+                        <MediaItemDetailed key={song.id} data={song} />
                     ))
                 ) : (
                     <p className="text-neutral-400">No songs in this playlist.</p>
