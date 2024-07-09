@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useUser } from "@/hooks/useUser";
 import useAuthModel from "@/hooks/useAuthModel";
 import { RxCountdownTimer } from "react-icons/rx";
+import { Bars } from "react-loader-spinner";
 
 interface ListItemProps{
     image:string;
@@ -63,10 +64,10 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href, classname}) => {
                     transition 
                     opacity-0 
                     rounded-full 
+                    bg-neutral-800
                     flex 
                     items-center 
                     justify-center 
-                  bg-rose-500 
                     p-3
                     drop-shadow-md 
                     right-5 
@@ -74,7 +75,15 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href, classname}) => {
                     hover:scale-110
                 "
             >  
-                SongCount 
+                {/* SongCount  */}
+                <Bars
+                    height="20"
+                    width="20"
+                    color="#F24171"
+                    ariaLabel="bars-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
+                />
             </div>
         </button>
     );

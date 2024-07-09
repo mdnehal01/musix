@@ -77,8 +77,8 @@ const AccountContent: React.FC<AccountContentProps> = (
                 <ListItem
                     classname="h-32 lg:w-1/3 sm:w-1/2 w-full"
                     image="/images/liked.png"
-                    name="Liked Songs"
-                    href="liked"
+                    name="Favourites"
+                    href="favourites"
                 />
             </div>
        

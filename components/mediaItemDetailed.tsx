@@ -5,6 +5,7 @@ import usePlayer from "@/hooks/usePlayer";
 import { Song } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import AddToPlaylistDialogBtn from "./playlist/AddToPlaylistDialogBtn";
 
 interface MediaItemDetailedProps {
     data:Song;
@@ -100,7 +101,6 @@ const MediaItemDetailed:React.FC<MediaItemDetailedProps> = ({
                 <div className="flex justify-end w-[10%]">
                     <p className="text-[#999999] text-sm">{formatDuration}</p>
                 </div>
-                
             </div>
         </div>
     );

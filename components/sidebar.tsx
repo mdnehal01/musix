@@ -12,7 +12,7 @@ import { twMerge } from "tailwind-merge";
 import Player from "./player";
 import { MdCreate, MdOutlineExplore } from "react-icons/md";
 import { IoAlbumsOutline, IoCreate } from "react-icons/io5";
-import { CgProfile } from "react-icons/cg";
+import { CgPlayList, CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import { useRouter } from "next/navigation";
 import { useUser } from "@/hooks/useUser";
@@ -53,7 +53,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
             {
                 icon: HiHome,
                 label: "Home",
-                active: pathName !== "/search",
+                active: pathName === "/",
                 href: "/",
             },
             {
@@ -65,8 +65,14 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
             {
                 icon: BiHeart,
                 label: "Favourites",
-                active: pathName === "/liked",
-                href: "/liked",
+                active: pathName === "/favourites",
+                href: "/favourites",
+            },
+            {
+                icon: CgPlayList,
+                label: "Playlist",
+                active: pathName === "/playlist",
+                href: "/playlist",
             },
             {
                 icon: MdOutlineExplore,

@@ -24,6 +24,16 @@ export interface UserDetails{
     payment_method?: Stripe.PaymentMethod[Stripe.PaymentMethod.Type];
 }
 
+export interface Playlist{
+    playlist_id: string
+    user_id: string
+    playlist_name: string
+    description: string
+    title: string
+    song_id: string[]
+    created_at: string
+}
+
 export interface Product{
     id:string;
     active?:boolean;

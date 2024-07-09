@@ -25,6 +25,7 @@ const SongOption: React.FC<SongOptionProps> = ({ songId }) => {
   };
 
   const handleCopyLink = () => {
+    // @ts-ignore
     navigator.clipboard.writeText(songUrl);
     toast.success("Link copied to clipboard");
   };

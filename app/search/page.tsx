@@ -5,6 +5,7 @@ import SearchInput from "@/components/searchInput";
 import { FaSearch } from "react-icons/fa";
 import SearchContent from "./components/searchContent";
 import getSongsByAlbum from "@/actions/getSongsByAlbum";
+import getPlaylistByUserId from "@/actions/getPlaylistByUserId";
 
 interface SearchProps {
     searchParams: {
@@ -27,6 +28,8 @@ const Search = async ({ searchParams }: SearchProps) => {
     } else if (searchParams.album) {
         songs = await getSongsByAlbum(searchParams.album)
     }
+
+    const fetchPlaylistByUserId = await getPlaylistByUserId();
 
     return (
         <div
@@ -51,7 +54,7 @@ const Search = async ({ searchParams }: SearchProps) => {
             <div className="p-6">
                 <SearchInput />
             </div>
-            <SearchContent songs={songs} />
+            <SearchContent playlist={fetchPlaylistByUserId} songs={songs} />
         </div>
     );
 }
