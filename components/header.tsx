@@ -52,8 +52,8 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             {
                 icon: BiHeart,
                 label: "Favourites",
-                active: pathName === "/liked",
-                href: "/liked",
+                active: pathName === "/favourites",
+                href: "/favourites",
             },
             {
                 icon: CgPlayList,
