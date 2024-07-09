@@ -6,6 +6,7 @@ import { FaSearch } from "react-icons/fa";
 import SearchContent from "./components/searchContent";
 import getSongsByAlbum from "@/actions/getSongsByAlbum";
 import getPlaylistByUserId from "@/actions/getPlaylistByUserId";
+import Footer from "@/components/footer/Footer";
 
 interface SearchProps {
     searchParams: {
@@ -55,6 +56,7 @@ const Search = async ({ searchParams }: SearchProps) => {
                 <SearchInput />
             </div>
             <SearchContent playlist={fetchPlaylistByUserId} songs={songs} />
+            <Footer/>
         </div>
     );
 }

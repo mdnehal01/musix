@@ -73,7 +73,8 @@ const AccountContent: React.FC<AccountContentProps> = (
                 </div>
             )}
 
-            <div className="flex flex-nowrap w-full">
+            <div className="flex flex-col flex-nowrap w-full">
+                <h1 className="text-xl font-bold py-3">Favourites</h1>
                 <ListItem
                     classname="h-32 lg:w-1/3 sm:w-1/2 w-full"
                     image="/images/liked.png"

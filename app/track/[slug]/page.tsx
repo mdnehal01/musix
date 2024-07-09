@@ -6,6 +6,7 @@ import LikeButton from "@/components/likeButton";
 import Button from "@/components/button";
 import ListItem from "@/components/listItems";
 import { BiShare, BiShareAlt } from "react-icons/bi";
+import Footer from "@/components/footer/Footer";
 
 interface SongPageProps {
   params: {
@@ -55,7 +56,7 @@ const SongPage = async ({ params }: SongPageProps) => {
       <div className="px-6 mt-4">
         <Button className="w-60 rounded-none ">Play</Button>
       </div>
-      
+      <Footer/>
     </div>
   );
 };

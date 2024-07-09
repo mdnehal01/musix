@@ -31,9 +31,9 @@ const CreatePlaylistBtn = () => {
   return (
     <button
       onClick={onClick}
-      className="h-12 w-12 bg-rose-500 flex rounded-full shadow-black/70 hover:shadow-black/30 shadow-lg items-center justify-center"
+      className="h-12 w-56 bg-rose-500 flex text-lg hover:rounded-lg rounded-none transition duration-200 text-black shadow-black/70 hover:shadow-black/30 shadow-lg items-center justify-center"
     >
-      <BsPlus size={40} />
+      <p>Create Playlist</p>
     </button>
   );
 };

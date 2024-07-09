@@ -2,7 +2,7 @@ import getSongs from "@/actions/getSongs";
 import Header from "@/components/header"
 import ListItem from "@/components/listItems";
 import PageContent from "./components/PageContent";
-
+import Footer from "@/components/footer/Footer"
 
 export const revalidate = 0;
 
@@ -45,6 +45,7 @@ export default async function Home() {
         <PageContent songs={songs} />
           
       </div>
+      <Footer/>
     </div>
   );
 }

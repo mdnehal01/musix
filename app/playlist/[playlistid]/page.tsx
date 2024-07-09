@@ -6,6 +6,8 @@ import PlayListItem from "@/components/playlistItems";
 import { BsDot } from "react-icons/bs";
 import AddSongsBtn from "./components/addSongsBtn";
 import MediaItemDetailed from "@/components/mediaItemDetailed";
+import MediaItem from "@/components/mediaItem";
+import Footer from "@/components/footer/Footer";
 
 interface PlaylistPageProps {
     params: {
@@ -83,7 +85,7 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
             </Header>
 
             {/*   Fetched songs from the song playlist   */}
-            <div className="p-6">
+            <div className="p-6 max-md:hidden gap-y-2 flex flex-col">
                 {songs.length > 0 ? (
                     songs.map((song) => (
                         <MediaItemDetailed key={song.id} data={song} />
@@ -92,6 +94,17 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
                     <p className="text-neutral-400">No songs in this playlist.</p>
                 )}
             </div>
+
+            <div className="p-6 md:hidden gap-y-2 flex flex-col">
+                {songs.length > 0 ? (
+                    songs.map((song) => (
+                        <MediaItem key={song.id} data={song} />
+                    ))
+                ) : (
+                    <p className="text-neutral-400">No songs in this playlist.</p>
+                )}
+            </div>
+            <Footer/>
         </div>
     );
 }
