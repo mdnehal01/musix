@@ -52,6 +52,11 @@ const PlaylistDialogue: React.FC<PlaylistDialogueProps> = ({ songId, isOpen, onC
                     <CgClose />
                 </button>
                 <div>
+
+                    <h1 className="text-white/80 text-xl">
+                        Add to playlist
+                    </h1>
+
                     {songId && (
                         <p>Adding song to playlist with ID: {songId}</p>
                     )}

@@ -3,7 +3,7 @@
 import { useMemo } from "react";
 import { MdCreate, MdOutlineExplore } from "react-icons/md";
 import { IoAlbumsOutline } from "react-icons/io5";
-import { CgClose, CgProfile } from "react-icons/cg";
+import { CgClose, CgPlayList, CgProfile } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import Button from "./button";
 import { useRouter } from "next/navigation";
@@ -40,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             {
                 icon: HiHome,
                 label: "Home",
-                active: pathName !== "/search",
+                active: pathName === "/",
                 href: "/",
             },
             {
@@ -54,6 +54,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 label: "Favourites",
                 active: pathName === "/liked",
                 href: "/liked",
+            },
+            {
+                icon: CgPlayList,
+                label: "Playlist",
+                active: pathName === "/playlist",
+                href: "/playlist",
             },
             {
                 icon: MdOutlineExplore,
