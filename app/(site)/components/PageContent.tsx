@@ -3,6 +3,7 @@ import React from "react";
 import { Song } from "@/types";
 import SongItem from "@/components/songItem";
 import useOnPlay from "@/hooks/useOnPlay";
+import Button from "@/components/button";
 
 interface PageContentProps {
     songs:Song[];
@@ -23,6 +24,7 @@ const PageContent:React.FC<PageContentProps> = ({
     }
 
     return(
+        <div className="h-full w-full flex flex-col">
         <div
             className="
                 grid
@@ -43,6 +45,7 @@ const PageContent:React.FC<PageContentProps> = ({
                     data={item}
                 />
             ))}
+        </div>
         </div>
     );
 }

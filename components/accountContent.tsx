@@ -18,7 +18,7 @@ const AccountContent: React.FC<AccountContentProps> = (
 ) => {
     const router = useRouter();
     const subscribeModel = useSubscribeModel();
-    const { isLoading, subscription, user } = useUser();
+    const { isLoading, subscription, user, userDetails } = useUser();
 
     const [loading, setLoading] = useState(false);
 
@@ -47,6 +47,7 @@ const AccountContent: React.FC<AccountContentProps> = (
         <div className="mb-7 px-6 flex flex-col gap-y-10">
             {!subscription && (
                 <div className="flex flex-col gap-y-4">
+                    <h1 className="text-7xl font-bold">Hey {userDetails?.full_name},</h1>
                     <p>
                         No active plan.
                     </p>
@@ -60,6 +61,7 @@ const AccountContent: React.FC<AccountContentProps> = (
 
             {subscription && (
                 <div className="flex flex-col gap-y-4">
+                    <h1 className="text-7xl font-bold">Hey {userDetails?.full_name},</h1>
                     <p>
                         You are currently on the <b>{subscription?.prices?.products?.name}</b> plan.
                     </p>

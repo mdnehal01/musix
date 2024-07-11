@@ -3,11 +3,15 @@ import Header from "@/components/header"
 import ListItem from "@/components/listItems";
 import PageContent from "./components/PageContent";
 import Footer from "@/components/footer/Footer"
+import Button from "@/components/button";
+import SongPagination from "./components/SongPagination";
 
 export const revalidate = 0;
 
+let songs = [];
+
 export default async function Home() {
-  const songs = await getSongs();
+  songs = await getSongs(9);
   return (
     <div 
       className="
@@ -42,8 +46,8 @@ export default async function Home() {
           {songs.map((song) => <div>{song.title}</div>)}
         </div> */}
 
-        <PageContent songs={songs} />
-          
+        <SongPagination songs={songs} /> {/* Pass the fetched songs */}
+
       </div>
       <Footer/>
     </div>

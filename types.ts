@@ -12,6 +12,7 @@ export interface Song {
     duration:string;
     genre:string;
     release_date:string;
+    playtime:string;
 }
 
 export interface UserDetails{

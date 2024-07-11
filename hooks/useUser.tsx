@@ -34,11 +34,12 @@ export const MyUserContextProvider = (props: Props) => {
     const [userDetails, setUserDetails] = useState<UserDetails | null>(null); 
     const [subscription, setSubscription] = useState<Subscription | null>(null);
 
-    const getUserDetails = () => supabase.from('users').select('*').single();
+    const getUserDetails = () => supabase.from('users').select('*').eq('id', user?.id).single();
     const getSubscription = () =>
         supabase
             .from('subscriptions')
             .select('*, prices(*, products(*))')
+            .eq('user_id', user?.id) // Filter by the current user's ID
             .in('status', ['trialing', 'active'])
             .single();
 
