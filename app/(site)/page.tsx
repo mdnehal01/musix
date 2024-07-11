@@ -11,7 +11,7 @@ export const revalidate = 0;
 let songs = [];
 
 export default async function Home() {
-  songs = await getSongs(9);
+  songs = await getSongs();
   return (
     <div 
       className="
