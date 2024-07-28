@@ -48,7 +48,9 @@ const Footer = () => {
                 <img className='relative -left-5 -top-3' width={150} src="/images/LOGO.png"/>
                 <p className='text-2xl -mt-8'>Musix</p>
                 <br/>
-                <p className='text-[15px] text-neutral-400'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit ipsam, dolorem animi accusantium similique assumenda quo, temporibus soluta magni fugiat a ut delectus aperiam sunt amet id cupiditate quia. Laborum.</p>
+                <p className='text-[15px] text-neutral-400'>
+                    Welcome to One Musix, your ultimate music destination! We are passionate enthusiasts committed to providing a seamless and enjoyable music experience for all, offering something special for casual listeners, aficionados, and aspiring artists alike.
+                </p>
             </div>
 
 
@@ -64,11 +66,11 @@ const Footer = () => {
                         <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/subscription">Subscription</Link>
                     </div>
                     <div className='h-full w-full flex flex-col gap-3'>
-                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/about">About</Link>
-                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/portfolio">Portfolio</Link>
-                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/aboutus">About us</Link>
-                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/feedback">Feedback</Link>
-                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/careers">Careers</Link>
+                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pages/about">About</Link>
+                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pages/portfolio">Portfolio</Link>
+                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pages/aboutus">About us</Link>
+                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pages/feedback">Feedback</Link>
+                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pages/careers">Careers</Link>
                     </div>
                 </div>
             </div>

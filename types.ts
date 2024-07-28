@@ -25,6 +25,14 @@ export interface UserDetails{
     payment_method?: Stripe.PaymentMethod[Stripe.PaymentMethod.Type];
 }
 
+// export interface Feedback{
+//     id: string;
+//     user_id?: string;
+//     full_name: string;
+//     feedback: string;
+//     created_at: string;
+// }
+
 export interface Playlist{
     playlist_id: string
     user_id: string

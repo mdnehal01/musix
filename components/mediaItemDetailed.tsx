@@ -5,7 +5,6 @@ import usePlayer from "@/hooks/usePlayer";
 import { Song } from "@/types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import AddToPlaylistDialogBtn from "./playlist/AddToPlaylistDialogBtn";
 
 interface MediaItemDetailedProps {
     data:Song;

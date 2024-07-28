@@ -3,11 +3,11 @@
 import { useMemo } from "react";
 import { MdCreate, MdOutlineExplore } from "react-icons/md";
 import { IoAlbumsOutline } from "react-icons/io5";
-import { CgClose, CgPlayList, CgProfile } from "react-icons/cg";
+import { CgClose, CgHeart, CgHome, CgPlayList, CgProfile, CgSearch, CgUser } from "react-icons/cg";
 import { usePathname } from "next/navigation";
 import Button from "./button";
 import { useRouter } from "next/navigation";
-import { HiHome } from "react-icons/hi";
+import { HiHeart, HiHome, HiSearch } from "react-icons/hi";
 import { twMerge } from "tailwind-merge";
 import { BiMenu, BiSearch, BiAtom, BiHeart } from "react-icons/bi";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
@@ -221,6 +221,17 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
             {/* Main content */}
             {children}
+            {/* MOBILE VIEW Bottom Tab */}
+            <div className="md:hidden flex h-14 w-full absolute z-10 bottom-0 left-0 px-2 pb-2">
+                <div className="w-full h-full bg-neutral-800/95 rounded-lg flex justify-evenly items-center">
+                    <CgHome/>
+                    <CgSearch/>
+                    <CgHeart/>
+                    <CgPlayList/>
+                    {user ? <CgUser onClick={() => router.push("/account")}/> : <LuLogIn onClick={authModel.onOpen}/>}
+                    
+                </div>
+            </div>
         </div>
     );
 };

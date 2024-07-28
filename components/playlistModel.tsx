@@ -70,7 +70,7 @@ const PlaylistModel = () => {
     }
   };
 
-  console.log("PlaylistModel isOpen:", playlistModel.isOpen);
+  // console.log("PlaylistModel isOpen:", playlistModel.isOpen);
 
   return (
     <Model
