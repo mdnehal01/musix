@@ -19,6 +19,7 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs, playlist }) => {
     const [isPlaylistDialogOpen, setIsPlaylistDialogOpen] = useState(false);
     const [selectedSongId, setSelectedSongId] = useState<string | null>(null);
 
+
     const handleOpenDialog = (songId: string) => {
         setSelectedSongId(songId);
         setIsPlaylistDialogOpen(true);
@@ -75,13 +76,14 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs, playlist }) => {
                 </div>
             ))}
             {isPlaylistDialogOpen && (
-                <PlaylistDialogue 
+                <PlaylistDialogue
                     songId={selectedSongId} 
                     playlist={playlist}
                     isOpen={isPlaylistDialogOpen} 
                     onClose={handleCloseDialog} 
                 />
             )}
+
         </div>
     );
 }

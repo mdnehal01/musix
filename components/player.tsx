@@ -9,13 +9,16 @@ import { twMerge } from "tailwind-merge";
 import { useState } from "react";
 import useLoadImage from "@/hooks/useLoadImage";
 import Draggable from "react-draggable";
+import { Playlist } from "@/types";
 
 interface PlayerProps{
+    playlist: Playlist[];
     className?:string;
 }
 
 const Player:React.FC<PlayerProps> = ({
-    className
+    className,
+    playlist
 }) => {
     const player = usePlayer();
     const { song } = useGetSongById(player.activeId);
@@ -88,6 +91,7 @@ const Player:React.FC<PlayerProps> = ({
             )}
             
             <PlayerContent
+                playlist={playlist}
                 classname={hiddenPlayer}
                 key={songUrl}
                 song={song}

@@ -8,6 +8,7 @@ import AddSongsBtn from "./components/addSongsBtn";
 import MediaItemDetailed from "@/components/mediaItemDetailed";
 import MediaItem from "@/components/mediaItem";
 import Footer from "@/components/footer/Footer";
+import { useUser } from "@/hooks/useUser";
 
 interface PlaylistPageProps {
     params: {
@@ -53,6 +54,14 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
     // @ts-ignore
     const songIds = fetchedPlaylist.song_id || [];
     const songs = songIds.length ? await getPlaylistSongsByIds(songIds) : [];
+    
+    // const {user} = useUser();
+
+    // if(!user){
+    //     return;
+    // }
+
+    // TODO: Authenticated user can only play the songs
 
     return (
         <div 
@@ -74,7 +83,7 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
                         <CgPlayList className="mt-2" size={50}/>
                     </div>
                 </div>
-                <div className="flex items-center gap-x-3 -mt-3">
+                <div className="flex items-center gap-x-3 mt-3">
                     <p className="text-neutral-400 text-lg">Playlist</p>
                     <BsDot size={30} className="text-neutral-400"/> 
                     <p className="text-neutral-400 text-md">{formattedDate}</p>
@@ -88,7 +97,8 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
             <div className="p-6 max-md:hidden gap-y-2 flex flex-col">
                 {songs.length > 0 ? (
                     songs.map((song) => (
-                        <MediaItemDetailed key={song.id} data={song} />
+                        <MediaItemDetailed key={song.id} data={song}/>
+                        // TODO: Add minus sign to remove song from the playlist
                     ))
                 ) : (
                     <p className="text-neutral-400">No songs in this playlist.</p>
@@ -99,6 +109,7 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
                 {songs.length > 0 ? (
                     songs.map((song) => (
                         <MediaItem key={song.id} data={song} />
+                        // TODO: Add minus sign to remove song from the playlist
                     ))
                 ) : (
                     <p className="text-neutral-400">No songs in this playlist.</p>

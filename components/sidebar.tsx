@@ -6,7 +6,7 @@ import { BiAtom, BiHeart, BiLogIn, BiPlayCircle, BiSearch } from "react-icons/bi
 import Box from "./box";
 import Sidebaritem from "./sidebaritems";
 import Library from "./library";
-import { Song } from "@/types";
+import { Playlist, Song } from "@/types";
 import usePlayer from "@/hooks/usePlayer";
 import { twMerge } from "tailwind-merge";
 import Player from "./player";
@@ -25,10 +25,11 @@ import { LuLogIn, LuLogOut } from "react-icons/lu";
 
 interface SidebarProps {
     children: React.ReactNode;
+    playlist: Playlist[];
     songs: Song[];
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
+const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlist }) => {
     const pathName = usePathname();
     const player = usePlayer();
     const router = useRouter();
@@ -166,7 +167,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
                 >
                     {children}
                 </main>
-                <Player />
+                <Player playlist={playlist} />
             </div>
 
             {/* Right Bar (Fixed) */}

@@ -1,6 +1,6 @@
 "use client";
 
-import { Song } from "@/types";
+import { Song, Playlist } from "@/types";
 import PlayBarSong from "./playBarSong";
 import LikeButton from "./likeButton";
 import { BsPauseFill, BsPlayFill } from "react-icons/bs";
@@ -18,12 +18,13 @@ import { BiCaretUp, BiDotsHorizontal, BiMinus, BiRepeat, BiShuffle } from "react
 import { Bars } from "react-loader-spinner";
 import SongOption from "./SongOption";
 import { twMerge } from "tailwind-merge";
-import { createClient } from "@supabase/supabase-js";
+
 
 interface PlayerContentProps {
   song: Song;
   songUrl: string;
   shuffle: boolean;
+  playlist: Playlist[];
   onToggleShuffle: () => void;
   repeat: boolean;
   onToggleRepeat: () => void;
@@ -39,6 +40,7 @@ const formatDuration = (duration: number): string => {
 };
 
 const PlayerContent: React.FC<PlayerContentProps> = ({ 
+  playlist,
   song, 
   songUrl,
   shuffle,
@@ -272,6 +274,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   }, [isPlaying, isMuted]);
 
   if(elapsedTime > 45){
+    // TODO: Increase play times
   }
 
   return (
@@ -296,7 +299,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
       {/* Playbar for mobile and tabs */}
       <div className="flex h-full justify-center w-full md:hidden relative">
-            <PlayBarSong data={song} />
+
+      
+            <PlayBarSong data={song} playlist={playlist}/>
 
             <div className="md:hidden absolute right-[18%] top-[24%] w-0 h-0 scale-125">
               <LikeButton songId={song.id}/>
@@ -319,7 +324,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       <div className="w-[92%] h-[60%] flex md:flex-row flex-col justify-between items-center relative">
 
         <div className="md:flex h-full w-[20%] justify-start hidden">
-            <PlayBarSong data={song} />
+            <PlayBarSong data={song} playlist={playlist}/>
         </div>
 
 

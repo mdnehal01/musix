@@ -1,3 +1,5 @@
+// This is playlist dialogue when clicked on the music image while player is on
+
 import { CgClose } from "react-icons/cg";
 import { Playlist } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
@@ -5,15 +7,17 @@ import toast from "react-hot-toast";
 import AddToPlaylistBtn from "@/components/playlist/AddToPlaylistBtn";
 import { twMerge } from "tailwind-merge";
 
-interface PlaylistDialogueProps {
+interface PlaylistDialoguePlayerProps {
     playlist: Playlist[];
     className?:string;
+    songName?: string;
+    songAuthor?:string;
     songId: string | null;
     isOpen: boolean;
     onClose: () => void;
 }
 
-const PlaylistDialogue: React.FC<PlaylistDialogueProps> = ({ songId, isOpen, onClose, playlist = [], className }) => { // Default value for playlist
+const PlaylistDialoguePlayer: React.FC<PlaylistDialoguePlayerProps> = ({songAuthor, songName, songId, isOpen, onClose, playlist, className }) => { // Default value for playlist
     const supabaseClient = createClientComponentClient();
     if (!isOpen) return null;
 
@@ -48,8 +52,7 @@ const PlaylistDialogue: React.FC<PlaylistDialogueProps> = ({ songId, isOpen, onC
     };
 
     return (
-        <div className={twMerge(`absolute h-full w-full backdrop-blur-md top-0 left-0 z-50`, className)}>
-            <div className="md:p-12 p-3 max-md:pt-5 bg-neutral-800/90 rounded-md md:top-[50%] md:left-[50%] md:-translate-y-[50%] md:-translate-x-[50%] md:h-2/3 md:w-1/2 h-full w-full md:relative">
+            <div className="absolute w-[500px] h-[600px] z-50 bg-neutral-900 bottom-0 md:bottom-20 rounded-lg p-3">
                 <button onClick={onClose} className="absolute top-5 right-5">
                     <CgClose />
                 </button>
@@ -59,7 +62,10 @@ const PlaylistDialogue: React.FC<PlaylistDialogueProps> = ({ songId, isOpen, onC
                     </h1>
 
                     {songId && (
-                        <p>Adding song to playlist with ID: {songId}</p>
+                        <div>
+                            <p>Song: {songName}</p>
+                            <p>Author: {songAuthor}</p>
+                        </div>
                     )}
                     <div className="mt-10">
                         {playlist.map((playlistsingle) =>
@@ -83,8 +89,7 @@ const PlaylistDialogue: React.FC<PlaylistDialogueProps> = ({ songId, isOpen, onC
                     </div>
                 </div>
             </div>
-        </div>
     );
 };
 
-export default PlaylistDialogue;
+export default PlaylistDialoguePlayer;
