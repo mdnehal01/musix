@@ -36,7 +36,8 @@ const PlayBar: React.FC<PlayBarProps> = ({
         >
             <RadixSlider.Track
                 className="
-                    bg-neutral-600
+                    dark:bg-neutral-600
+                    bg-neutral-200
                     relative
                     grow
                     rounded-full

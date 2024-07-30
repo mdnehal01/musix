@@ -104,7 +104,7 @@ const LikeButton: React.FC<LikeButtonProps> = ({ songId, classname }) => {
             className={twMerge(`hover:opacity-75
                 transition`, classname)}
         >
-            <Icon color={isLiked ? '#F24171' : 'white'} size={25} />
+            <Icon className={isLiked ? 'text-[#F24171]' : 'dark:text-[white] text-neutral-800'} size={25} />
         </button>
     );
 };

@@ -112,16 +112,17 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlist }) => {
         `)}
         >
             {/* LEFT BAR */}
-            <div className="hidden lg:flex flex-col justify-between flex-shrink-0 bg-[#0f0f0f9f] h-full w-[230px] p-2">
+            <div className="hidden lg:flex flex-col justify-between flex-shrink-0 dark:bg-[#0f0f0f9f] bg-[#F9F8F8] h-full w-[230px] p-2">
                 {/* LOGO */}
                 <Box className="bg-transparent mt-8 ml-3">
-                    <div className="cursor-pointer"  onClick={()=>{router.push("/")}}>
-                        <img src="./images/LOGO.png" alt="logo" width={100} />
+                    <div className="cursor-pointer absolute top-5 left-5"  onClick={()=>{router.push("/")}}>
+                        <img className="dark:flex hidden" src="./images/LOGO.png" alt="logo" width={100} />
+                        <img className="flex dark:hidden -mt-[15px] -ml-[12px]" src="./images/logoLight.png" alt="logo" width={140} />
                     </div>
                 </Box>
 
-                <Box className="bg-gradient-to-r from-[#0F0D0C]/15 to-[#5F5D5D]/15 rounded-none h-[80%] mt-20 relative">
-                    <p className="text-[#999999] ml-6 absolute -top-5">Menu</p>
+                <Box className="bg-gradient-to-r dark:from-[#0F0D0C]/15 from-white dark:to-[#5F5D5D]/15 to-white rounded-none h-[80%] mt-20 relative">
+                    <p className="dark:text-[#999999] text-black ml-6 absolute -top-5">Menu</p>
                     <div className="flex flex-col pl-12 py-3 gap-y-3">
                         {routes.map((item) => (
                             <Sidebaritem key={item.label} {...item} />
@@ -134,27 +135,30 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlist }) => {
                     {/* Logout and user profile buttons */}
                         {user ? (
                             <div className="flex w-full flex-col p-5 gap-y-3">
-                                <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-neutral-800 transition py-1">
                                     <FaUserAlt size={13}/> 
                                     <p>Account</p>
                                 </div>
-                                <div onClick={handleLogout} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={handleLogout} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-neutral-800 transition py-1">
                                     <LuLogOut/> Logout
                                 </div>
                             </div>
                         ) : (
                             <div className="flex w-full flex-col p-5 gap-y-3">
-                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-neutral-800 transition py-1">
                                     <MdCreate/> Sign up
                                 </div>
-                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-neutral-800 transition py-1">
                                     <LuLogIn/>Log in
                                 </div>
                             </div>
                         )}
                 </div>
                 </Box>
-            </div>
+            </div> 
+            {/* LEFT BAR END */}
+
+
 
             {/* MAIN CONTENT */}
             <div className="flex flex-col w-full h-full flex-shrink">
@@ -171,7 +175,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlist }) => {
             </div>
 
             {/* Right Bar (Fixed) */}
-            <div className="hidden md:flex flex-col flex-shrink-0 bg-[#0f0f0f9f] h-full w-[270px]">
+            <div className="hidden md:flex flex-col flex-shrink-0 dark:bg-[#0f0f0f9f] bg-[#F9F8F8] h-full w-[270px]">
                 <Box className="overflow-y-auto h-full bg-transparent">
                     <Library songs={songs}>{children}</Library>
                 </Box>

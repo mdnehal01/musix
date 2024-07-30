@@ -6,12 +6,17 @@ const config: Config = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       animation: {
         'spin-slow': 'spin 5s linear infinite',
         'spin-fast': 'spin 0.5s linear infinite',
       },
+      colors: {
+        'dark-primary': '#001857',
+        'light-primary': '#ffffff'
+      }
     },
   },
   plugins: [

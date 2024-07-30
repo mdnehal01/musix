@@ -43,7 +43,8 @@ const MediaItemDetailed:React.FC<MediaItemDetailedProps> = ({
                 items-center
                 gap-x-3
                 cursor-pointer
-                hover:bg-neutral-700/20
+                dark:hover:bg-neutral-700/20
+                hover:bg-neutral-200
                 w-full
                 p-2
                 rounded-md
@@ -77,28 +78,28 @@ const MediaItemDetailed:React.FC<MediaItemDetailedProps> = ({
                 items-center
             ">
                 <div className="flex flex-col w-1/3">
-                    <p className="text-white text-sm truncate">
+                    <p className="dark:text-white font-medium text-neutral-950 text-sm truncate">
                         {data.title}
                     </p>
-                    <p className="text-neutral-400 text-xs truncate">
+                    <p className="dark:text-neutral-400 text-neutral-800 text-xs truncate">
                         {data.author}
                     </p>
                 </div>
                 
                 <div className="flex w-1/6 h-full">
-                    <p className="text-[#999999] text-sm truncate">
+                    <p className="dark:text-[#999999] text-black font-medium text-sm truncate">
                         {releaseYear}
                     </p>
                 </div>
 
                 <div className="flex w-1/6 h-full">
-                    <p className="text-[#999999] text-sm truncate">
+                    <p className="dark:text-[#999999] text-black font-medium text-sm truncate">
                         {data.album}
                     </p>
                 </div>
 
                 <div className="flex justify-end w-[10%]">
-                    <p className="text-[#999999] text-sm">{formatDuration}</p>
+                    <p className="dark:text-[#999999] text-black font-medium text-sm">{formatDuration}</p>
                 </div>
             </div>
         </div>

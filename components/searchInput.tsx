@@ -25,25 +25,25 @@ const SearchInput = () => {
             <div className="flex gap-x-2">
                 <button
                     onClick={() => setSearchType("title")}
-                    className={`px-4 transition duration-200 py-2 ${searchType === "title" ? "text-rose-500" : "text-[#999999]"}`}
+                    className={`px-4 transition duration-200 py-2 ${searchType === "title" ? "text-rose-500 font-medium" : "dark:text-[#999999] text-black font-medium"}`}
                 >
                     Title
                 </button>
                 <button
                     onClick={() => setSearchType("author")}
-                    className={`px-4 transition duration-200 py-2 ${searchType === "author" ? "text-rose-500" : "text-[#999999]"}`}
+                    className={`px-4 transition duration-200 py-2 ${searchType === "author" ? "text-rose-500 font-medium" : "dark:text-[#999999] text-black font-medium"}`}
                 >
                     Author
                 </button>
                 <button
                     onClick={() => setSearchType("album")}
-                    className={`px-4 transition duration-200 py-2 ${searchType === "album" ? "text-rose-500" : "text-[#999999]"}`}
+                    className={`px-4 transition duration-200 py-2 ${searchType === "album" ? "text-rose-500 font-medium" : "dark:text-[#999999] text-black font-medium"}`}
                 >
                     Album
                 </button>
             </div>
             <Input
-                className="border-neutral-800/0 focus:border-2 focus:border-white bg-black/20"
+                className="border-neutral-800/0 focus:border-2 dark:focus:border-white focus:border-neutral-300 dark:bg-black/20 bg-white"
                 placeholder={`Search by ${searchType}`}
                 value={value}
                 onChange={(e) => setValue(e.target.value)}

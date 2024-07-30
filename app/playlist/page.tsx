@@ -14,7 +14,8 @@ const Playlist = async () => {
     return (
         <div 
             className="
-                bg-[#1f1e1e8c] 
+                dark:bg-[#1f1e1e8c]
+                bg-[#F3F5F9]
                 h-full
                 w-full
                 overflow-hidden
@@ -24,10 +25,10 @@ const Playlist = async () => {
             <Header>
                 <div className="mb-2 flex flex-col gap-y-6">
                     <div className="flex justify-start items-center">
-                        <h1 className="text-white text-2xl font-semibold">
+                        <h1 className="dark:text-white text-rose-500 text-2xl font-semibold">
                             Playlists &nbsp; &nbsp;
                         </h1>
-                        <CgPlayList className="mt-2" size={30}/>
+                        <CgPlayList className="mt-2 dark:text-white text-rose-500" size={30}/>
                     </div>
                 </div>
 

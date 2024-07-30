@@ -5,7 +5,7 @@ import { Bars } from "react-loader-spinner";
 
 const Loading = () => {
     return (
-        <Box className="h-full flex items-center justify-center bg-[#0f0f0f]/40">
+        <Box className="h-full flex items-center justify-center dark:bg-[#0f0f0f]/40 bg-[#F5F5F9]">
             <Bars
                 height="50"
                 width="80"

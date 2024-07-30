@@ -15,7 +15,8 @@ export default async function Home() {
   return (
     <div 
       className="
-      bg-[#1f1e1e8c] 
+      dark:bg-[#1f1e1e8c]
+      bg-[#F3F5F9]
       h-full 
       w-full 
       overflow-hidden 
@@ -23,7 +24,7 @@ export default async function Home() {
     >
       <Header>
         <div className="mb-2">
-          <h1 className="text-2xl font-semibold text-white">
+          <h1 className="text-2xl font-semibold dark:text-white text-rose-500">
             Welcome Back
           </h1>
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
@@ -38,7 +39,7 @@ export default async function Home() {
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between items-center">
-          <h1 className="text-white text-xl font-semibold">Newest Song</h1>
+          <h1 className="dark:text-white text-rose-500 text-xl font-semibold">Newest Song</h1>
         </div>
 
         {/* list of songs */}

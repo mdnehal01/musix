@@ -1,7 +1,7 @@
 'use client'
 // Import necessary modules and components
 import { useMemo } from "react";
-import { MdCreate, MdOutlineExplore } from "react-icons/md";
+import { MdCreate, MdDarkMode, MdLightMode, MdOutlineExplore, MdViewDay } from "react-icons/md";
 import { IoAlbumsOutline } from "react-icons/io5";
 import { CgClose, CgHeart, CgHome, CgPlayList, CgProfile, CgSearch, CgUser } from "react-icons/cg";
 import { usePathname } from "next/navigation";
@@ -21,7 +21,9 @@ import { useState } from "react";
 import Box from "./box";
 import Sidebaritem from "./sidebaritems";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
+import { ToggleThemeBtn } from "./ToggleThemeBtn";
 
+import { useTheme } from "next-themes";
 
 // Define the HeaderProps interface
 interface HeaderProps {
@@ -114,6 +116,24 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
     const MenuIcon = !isSidebarOpen ? MdMenu : CgClose;
 
+    // THEME SET
+    const [pageDarkTheme, setPageDarkTheme] = useState(true);
+
+    const { setTheme } = useTheme();
+
+    let modeIcon = pageDarkTheme ? <MdLightMode className="text-white"/> : <MdDarkMode className="text-rose-500"/>
+
+    const toggleTheme = () => {
+        if(pageDarkTheme){
+            setPageDarkTheme(false)
+            setTheme("light")
+        }
+        else if(!pageDarkTheme){
+            setPageDarkTheme(true)
+            setTheme("dark")
+        }
+    }
+
     return (
         <div className={twMerge(`
             h-fit
@@ -132,7 +152,14 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 
                 {/* Buttons for login and Signup */}
                 <div className="hidden lg:flex justify-between items-center gap-x-4">
-                   {user ? (
+
+                    {/* THEME Button */}
+                    
+                    <Button onClick={toggleTheme} className="border-2 border-white flex bg-transparent h-10 w-10 justify-center items-center">
+                        {modeIcon}
+                    </Button>
+
+                    {user ? (
                     <Button onClick={() => router.push('/account')} className="bg-white h-10 w-10 justify-center items-center">
                         <FaUserAlt />
                     </Button>
@@ -157,7 +184,8 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 left-0
                 top-0
                 h-full
-                bg-[#0f0f0f]
+                dark:bg-[#0f0f0f]
+                bg-[#F8F9FB]
                 w-4/5
                 md:w-1/2
                 p-2
@@ -181,7 +209,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     </div>
                 </Box>
 
-                <Box className="bg-gradient-to-r from-[#0F0D0C]/15 to-[#5F5D5D]/15 rounded-none h-[80%] mt-10 relative">
+                <Box className="bg-gradient-to-r dark:from-[#0F0D0C]/15 from-white dark:to-[#5F5D5D]/15 to-white rounded-none h-[80%] mt-10 relative">
                     <p className="text-[#999999] ml-6 absolute -top-5">Menu</p>
                     <div className="flex flex-col pl-12 py-3 gap-y-3">
                         {routes.map((item) => (
@@ -196,20 +224,20 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     {/* Logout and user profile buttons */}
                         {user ? (
                             <div className="flex w-full flex-col p-5 gap-y-3">
-                                <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-black transition py-1">
                                     <FaUserAlt size={13}/> 
                                     <p>Account</p>
                                 </div>
-                                <div onClick={handleLogout} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={handleLogout} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-black transition py-1">
                                     <LuLogOut/> Logout
                                 </div>
                             </div>
                         ) : (
                             <div className="flex w-full flex-col p-5 gap-y-3">
-                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-black transition py-1">
                                     <MdCreate/> Sign up
                                 </div>
-                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 text-neutral-400 transition py-1">
+                                <div onClick={authModel.onOpen} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-black transition py-1">
                                     <LuLogIn/>Log in
                                 </div>
                             </div>
@@ -221,6 +249,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
             {/* Main content */}
             {children}
+
             {/* MOBILE VIEW Bottom Tab */}
             <div className="md:hidden flex h-14 w-full absolute z-10 bottom-0 left-0 px-2 pb-2">
                 <div className="w-full h-full bg-neutral-800/95 rounded-lg flex justify-evenly items-center">

@@ -38,7 +38,8 @@ const MediaItem:React.FC<MediaItemProps> = ({
                 items-center
                 gap-x-3
                 cursor-pointer
-                hover:bg-neutral-800/50
+                dark:hover:bg-neutral-800/50
+                hover:bg-neutral-200
                 w-full
                 p-2
                 rounded-md
@@ -71,16 +72,18 @@ const MediaItem:React.FC<MediaItemProps> = ({
                 overflow-hidden
                 items-center
             ">
-                <div className="flex flex-col">
-                    <p className="text-white text-sm truncate">
+                <div className="flex flex-col w-32">
+                    <p className="dark:text-white font-medium text-neutral-950 text-sm truncate">
                         {data.title}
                     </p>
-                    <p className="text-neutral-400 text-xs truncate">
+                    <p className="dark:text-neutral-400 text-neutral-800 text-xs truncate">
                         {data.author}
                     </p>
                 </div>
+                <div className="">
+                    <p className="dark:text-[#999999] text-black font-medium text-sm">{formatDuration}</p>
+                </div>
                 
-                <p className="text-[#999999] text-sm">{formatDuration}</p>
             </div>
         </div>
     );

@@ -71,7 +71,8 @@ const Player:React.FC<PlayerProps> = ({
         // <Draggable disabled={!playerMinimize}>
         <div 
             className={twMerge(`
-                bg-[#0F0F0F]/80
+                dark:bg-[#0F0F0F]/80
+                bg-[#ffffff]
                 relative
                 w-full
                 py-2

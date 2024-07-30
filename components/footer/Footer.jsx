@@ -10,7 +10,7 @@ import { MdMail } from 'react-icons/md'
 
 const Footer = () => {
   return (
-    <footer className='bg-neutral-900/50 w-full h-auto mt-5'>
+    <footer className='dark:bg-neutral-900/50 bg-white w-full h-auto mt-5'>
         <div className='h-auto py-10 w-full grid items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 px-10'>
             <div className='w-full pb-6 h-full flex items-center max-md:mt-3 md:border-b border-neutral-700'>
                 <div className='h-full w-[80px] flex items-center justify-start'>

@@ -111,12 +111,12 @@ const PlayBarSong: React.FC<PlayBarSongProps> = ({
                 justify-end
                 mb-[5px]
             ">
-                <p className="text-white text-base truncate hover:text-rose-500" onClick={(e) => { e.stopPropagation(); router.push(`/track/${data.id}`); }}>
+                <p className="dark:text-white text-black text-base font-semibold truncate hover:text-rose-500 cursor-pointer" onClick={(e) => { e.stopPropagation(); router.push(`/track/${data.id}`); }}>
                     {data.title}
                 </p>
 
                 {/* TODO: Clicking on author opens Author's profile */}
-                <p className="text-neutral-400 text-xs truncate">
+                <p className="dark:text-neutral-400 text-neutral-800 hover:text-red-500 font-medium text-xs truncate cursor-pointer">
                     {data.author}
                 </p>
             </div>

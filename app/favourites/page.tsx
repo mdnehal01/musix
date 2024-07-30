@@ -12,7 +12,8 @@ const Liked = async () => {
     return (
         <div 
             className="
-                bg-[#1f1e1e8c] 
+                dark:bg-[#1f1e1e8c]
+                bg-[#F3F5F9]
                 h-full
                 w-full
                 overflow-hidden
@@ -57,7 +58,8 @@ const Liked = async () => {
                             </p>
                             <h1
                                 className="
-                                    text-white
+                                    dark:text-white
+                                    text-rose-500
                                     text-4xl
                                     sm:text-5xl
                                     lg:text-6xl

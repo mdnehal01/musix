@@ -11,6 +11,9 @@ import getSongsByUserId from "@/actions/getSongsByUserId";
 
 import getActiveProductsWithPrices from "@/actions/getActiveProductsWithPrices";
 import getPlaylistByUserId from "@/actions/getPlaylistByUserId";
+import { ThemeProvider } from "@/components/theme-provider";
+import Button from "@/components/button";
+import { MdLightMode } from "react-icons/md";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -33,9 +36,15 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={font.className}>
-        <ToasterProvider/>
-        <SupabaseProvider>
+      <body className="bg-gradient-to-tr dark:from-[#002E09] from-white dark:via-[#001857] via-white dark:to-[#600000] to-white">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <ToasterProvider/>
+          <SupabaseProvider>
           <UserProvider>
             <ModelProvider products={products}/>
               <Sidebar songs={userSongs} playlist={fetchedPlaylist}>
@@ -43,7 +52,8 @@ export default async function RootLayout({
               </Sidebar>
               {/* <Player/> */}
           </UserProvider>
-        </SupabaseProvider>
+          </SupabaseProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

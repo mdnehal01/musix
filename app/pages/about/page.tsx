@@ -9,7 +9,8 @@ const About = async () => {
     return (
         <div 
             className="
-                bg-[#1f1e1e8c] 
+                dark:bg-[#1f1e1e8c]
+                bg-[#F3F5F9]
                 h-full
                 w-full
                 overflow-hidden

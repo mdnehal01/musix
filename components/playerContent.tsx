@@ -386,18 +386,18 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       {/* Playbar for Desktop */}
       <div id="PlayBar" className="md:flex hidden w-full h-[30%] justify-center">
         <div className="h-full w-[5%] flex justify-end items-center">
-          <p className="text-neutral-400 font-normal text-xs">{elapsedTimeShow}</p>
+          <p className="dark:text-neutral-400 text-neutral-900 font-normal text-xs">{elapsedTimeShow}</p>
         </div>
         <div className="h-full w-[87%] flex items-center px-2">
           <PlayBar value={audioRef.current && audioRef.current.duration ? (elapsedTime / audioRef.current.duration) || 0 : 0} onChange={handlePlaybarChange} />
         </div>
         <div className="h-full w-[5%] flex justify-start items-center">
-          <p className="text-neutral-400 font-normal text-xs">{duration}</p>
+          <p className="dark:text-neutral-400 text-neutral-900 font-normal text-xs">{duration}</p>
         </div>
       </div>
       
       <div className="absolute md:right-2 md:top-2 -top-5 right-0">
-          <BiDotsHorizontal onClick={toggleDialogue} className="text-[#999999] hover:text-white cursor-pointer" />
+          <BiDotsHorizontal onClick={toggleDialogue} className="dark:text-[#999999] text-black hover:text-white cursor-pointer" />
           {isDialogueOpen && (
           <div 
             ref={dialogueRef} 
@@ -409,11 +409,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
       </div>
 
       <div className="absolute md:right-9 md:top-2 -top-5 right-6">
-        <BiCaretUp onClick={()=>{onFullScreen();}} className="text-[#999999] hover:text-white cursor-pointer"/>
+        <BiCaretUp onClick={()=>{onFullScreen();}} className="dark:text-[#999999] text-black hover:text-white cursor-pointer"/>
       </div>
 
       <div className="absolute md:right-16 md:top-2 -top-5 right-12">
-        <BiMinus onClick={()=>{onMinimize();}} className="text-[#999999] hover:text-white cursor-pointer"/>
+        <BiMinus onClick={()=>{onMinimize();}} className="dark:text-[#999999] text-black hover:text-white cursor-pointer"/>
       </div>
 
       <audio ref={audioRef}/>

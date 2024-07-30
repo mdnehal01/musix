@@ -43,12 +43,13 @@ const PlayListItem:React.FC<PlayListItemProps> = ({name, href, classname}) => {
             rounded-md 
             overflow-hidden 
             gap-x-4 
-            bg-neutral-500/30
+            dark:bg-neutral-500/30
+            bg-white
             transition 
             duration-200
             p-1
         `, classname)}>
-            <div className="hover:bg-rose-900/80 transition duration-200 flex items-center justify-center h-full w-full">
+            <div className="dark:hover:bg-rose-900/80 hover:bg-rose-200 transition duration-200 flex items-center justify-center h-full w-full">
                 <p className="truncate font-medium py-5">{name}</p>
                 <div 
                     className="

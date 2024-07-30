@@ -4,10 +4,10 @@
 
 
 
-html, body, 
+html, body,
 :root{
   height: 100%;
-  background-image: linear-gradient(-45deg,#002E09,#001857,#600000);
+  /* background-image: linear-gradient(-45deg,#002E09,#001857,#600000); */
   color-scheme: dark;
 }
 

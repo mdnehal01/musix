@@ -43,7 +43,8 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href, classname}) => {
             rounded-md 
             overflow-hidden 
             gap-x-4 
-            bg-neutral-100/10 
+            dark:bg-neutral-100/10
+            bg-white 
             hover:bg-neutral-100/20 
             transition 
             pr-4
@@ -64,7 +65,8 @@ const ListItem:React.FC<ListItemProps> = ({image, name, href, classname}) => {
                     transition 
                     opacity-0 
                     rounded-full 
-                    bg-neutral-800
+                    dark:bg-neutral-800
+                    bg-white
                     flex 
                     items-center 
                     justify-center 

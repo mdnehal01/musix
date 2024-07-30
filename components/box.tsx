@@ -12,7 +12,8 @@ const Box:React.FC<BoxProps> = ({children, className}) => {
             h-fit
             w-full
             scrollbar-thin
-            scrollbar-thumb-gray-800
+            dark:scrollbar-thumb-gray-800
+            scrollbar-thumb-gray-300
             scrollbar-track-transparent
         `, className
         )}>

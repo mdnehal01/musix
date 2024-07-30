@@ -35,7 +35,8 @@ const Search = async ({ searchParams }: SearchProps) => {
     return (
         <div
             className="
-                bg-[#1f1e1e8c]
+                dark:bg-[#1f1e1e8c]
+                bg-[#F3F5F9]
                 h-full 
                 w-full
                 overflow-hidden
@@ -45,10 +46,10 @@ const Search = async ({ searchParams }: SearchProps) => {
             <Header>
                 <div className="mb-2 flex flex-col gap-y-6">
                     <div className="flex flex-row items-baseline">
-                        <h1 className="text-white text-2xl font-semibold">
+                        <h1 className="dark:text-white text-rose-500 text-2xl font-semibold">
                             Search &nbsp; &nbsp;
                         </h1>
-                        <FaSearch />
+                        <FaSearch className="dark:text-white text-rose-500"/>
                     </div>
                 </div>
             </Header>

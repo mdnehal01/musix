@@ -67,15 +67,15 @@ const SongItem:React.FC<SongItemProps> = ({
 
             <div className="flex items-start justify-between w-full pt-2 gap-y-1">
                 <div className="flex flex-col w-3/4">
-                    <p className="font-normal truncate w-full text-sm">
+                    <p className="truncate w-full font-semibold text-sm">
                         {data.title}
                     </p>
-                    <p className="text-neutral-400 pb-4 truncate w-full text-xs">
+                    <p className="dark:text-neutral-400 text-neutral-800 font-medium pb-4 truncate w-full text-xs">
                         {data.author}
                     </p>
                 </div>
                 <div className="flex">
-                    <p className="text-[#999999] text-sm">{formatDuration}</p>
+                    <p className="dark:text-[#999999] text-neutral-800 font-medium text-sm">{formatDuration}</p>
                 </div>
             </div>
 

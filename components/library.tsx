@@ -44,13 +44,13 @@ const Library:React.FC<LibraryProps> = ({children, className, songs}) => {
         <div className="flex flex-col ">
             <div className="flex items-center justify-between px-5 pt-4">
                 <div className="inline-flex items-center gap-x-2">
-                    <TbPlaylist className="text-neutral-400" size={20}/>
-                    <p className="text-neutral-400 font-medium text-md">Your Library</p>
+                    <TbPlaylist className="dark:text-neutral-400 text-rose-500" size={20}/>
+                    <p className="dark:text-neutral-400 text-rose-500 font-medium text-md">Your Library</p>
                 </div>
                 <AiOutlinePlus
                     onClick={onClick}
                     size={18}
-                    className="text-neutral-400 cursor-pointer hover:text-white transition"
+                    className="dark:text-neutral-400 text-rose-800 cursor-pointer dark:hover:text-white hover:text-rose-500 transition"
                 />
             </div>
             <div className="flex flex-col gap-y-2 mt-4 px-3">

@@ -33,7 +33,8 @@ const SongPage = async ({ params }: SongPageProps) => {
   return (
     <div
       className="
-        bg-[#1f1e1e8c]
+        dark:bg-[#1f1e1e8c]
+        bg-[#F3F5F9]
         h-full 
         w-full
         overflow-hidden
@@ -51,7 +52,7 @@ const SongPage = async ({ params }: SongPageProps) => {
       <div className="flex px-6 -mt-4 justify-between items-center">
         <div className="flex flex-col"> 
           <h1 className="font-extrabold text-6xl">{song.title}</h1>
-          <p className="font-semibold text-2xl text-[#999999]">{song.author}</p>
+          <p className="font-semibold text-2xl dark:text-[#999999] text-black">{song.author}</p>
         </div>
         <div className="flex flex-row gap-x-5">
 
