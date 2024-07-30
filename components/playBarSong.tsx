@@ -62,6 +62,7 @@ const PlayBarSong:React.FC<PlayBarSongProps> = ({
                     fill
                     alt="Media Item"
                     src={imageUrl || '/images/liked.png'}
+                    onClick={()=>router.push(`/track/${data.id}`)}
                 />
             </div>
 
