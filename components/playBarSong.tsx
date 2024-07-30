@@ -4,6 +4,7 @@ import useLoadImage from "@/hooks/useLoadImage";
 import usePlayer from "@/hooks/usePlayer";
 import { Song } from "@/types";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 interface PlayBarSongProps {
     data:Song;
@@ -17,6 +18,7 @@ const PlayBarSong:React.FC<PlayBarSongProps> = ({
 
     const player = usePlayer();
     const imageUrl = useLoadImage(data);
+    const router = useRouter();
 
     const handleClick = () => {
         if(onClick) {
@@ -71,9 +73,11 @@ const PlayBarSong:React.FC<PlayBarSongProps> = ({
                 mb-[5px]
             ">
 
-                <p className="text-white text-base truncate">
+                <p className="text-white text-base truncate" onClick={()=>router.push(`/track/${data.id}`)}>
                     {data.title}
                 </p>
+
+                {/* TODO: Clicking on author opens Author's profile */}
                 <p className="text-neutral-400 text-xs truncate">
                     {data.author}
                 </p>

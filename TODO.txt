@@ -3,3 +3,5 @@ Songs for your Birthday: Date wise filter(Released on your Birthday) + Pop, HIPH
 Deletion of playlist
 
 Remove song from playlist
+
+Add author page (Taylor swift, Etc)
