@@ -163,6 +163,18 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
       const loadAudio = async () => {
         try {
+
+          // TODO Done: Added for google storage link
+          const googlePrefx = "https://kezskricfbuksihuhhqt.supabase.co/storage/v1/object/public/songs/https://storage.googleapis.com/onemusixapp"
+          const unwantedPrefix = "https://kezskricfbuksihuhhqt.supabase.co/storage/v1/object/public/songs/";
+
+          // alert(songUrl + " Default")
+
+          songUrl = songUrl.startsWith(googlePrefx) ? songUrl.slice(unwantedPrefix.length) : songUrl;
+          songUrl = decodeURIComponent(songUrl);
+
+          // alert(songUrl)
+
           await shakaPlayerRef.current?.load(songUrl);
           audio.volume = isMuted ? 0 : volume;
           setDuration(formatDuration(audio.duration));

@@ -60,7 +60,7 @@ const Footer = () => {
                 <div className='w-full grid grid-cols-2 h-full'>
                     <div className='h-full w-full flex flex-col gap-3'>
                         <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/">Home</Link>
-                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/services">Services</Link>
+                        <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pages/services">Services</Link>
                         <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/contact">Contact</Link>
                         <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/pricing">Pricing</Link>
                         <Link className='hover:underline hover:text-rose-500 transition text-neutral-400 duration-200' href="/subscription">Subscription</Link>

@@ -1,3 +1,5 @@
+// This is the Song Block which contains Image Author and Duration 
+
 "use client"
 
 import useLoadImage from "@/hooks/useLoadImage";
@@ -64,7 +66,7 @@ const SongItem:React.FC<SongItemProps> = ({
             </div>
 
             <div className="flex items-start justify-between w-full pt-2 gap-y-1">
-                <div className="flex flex-col">
+                <div className="flex flex-col w-3/4">
                     <p className="font-normal truncate w-full text-sm">
                         {data.title}
                     </p>
@@ -72,7 +74,9 @@ const SongItem:React.FC<SongItemProps> = ({
                         {data.author}
                     </p>
                 </div>
-                <p className="text-[#999999] text-sm">{formatDuration}</p>
+                <div className="flex">
+                    <p className="text-[#999999] text-sm">{formatDuration}</p>
+                </div>
             </div>
 
         </div>

@@ -20,6 +20,12 @@ const SongPage = async ({ params }: SongPageProps) => {
 
   const song = fetchedSongs.length > 0 ? fetchedSongs[0] : null;
 
+  // @ts-ignore
+  const time = song.duration;
+  const min = Math.floor(parseInt(time)/60);
+  const sec = Math.floor(parseInt(time)%60);
+  const formatDuration = `${min}:${sec.toString().padStart(2, '0')}`;
+
   if (!song) {
     return <div>Song not found.</div>;
   }
@@ -47,8 +53,12 @@ const SongPage = async ({ params }: SongPageProps) => {
           <h1 className="font-extrabold text-6xl">{song.title}</h1>
           <p className="font-semibold text-2xl text-[#999999]">{song.author}</p>
         </div>
-        
+        <div className="flex flex-row gap-x-5">
+
+        </div>
         <div className="flex justify-between items-center gap-10 h-full">
+          <p>{formatDuration}</p>
+          <p>{song.release_date}</p>
           <BiShareAlt className="cursor-pointer" size={30}/>
           <LikeButton classname="scale-150" songId={song.id} />
         </div>
@@ -56,6 +66,10 @@ const SongPage = async ({ params }: SongPageProps) => {
       <div className="px-6 mt-4">
         <Button className="w-60 rounded-none ">Play</Button>
       </div>
+
+
+      {/* TODO: Recommend music based on above music */}
+
       <Footer/>
     </div>
   );
