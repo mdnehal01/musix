@@ -29,6 +29,8 @@ const PlayBarSong: React.FC<PlayBarSongProps> = ({
     const [selectedSongId, setSelectedSongId] = useState<string | null>(null);
     const [selectedSongName, setSelectedSongName] = useState<string | null>(null);
     const [selectedSongAuthor, setSelectedSongAuthor] = useState<string | null>(null);
+    const [selectedSongImgUrl, setSelectedSongImgUrl] = useState<string | null>(null);
+    const [selectedSongSongUrl, setSelectedSongSongUrl] = useState<string | null>(null);
 
     const handleClick = () => {
         if (onClick) {
@@ -38,10 +40,12 @@ const PlayBarSong: React.FC<PlayBarSongProps> = ({
         return player.setId(data.id);
     }
 
-    const handleOpenDialog = (songId: string, songName: string, songAuthor: string) => {
+    const handleOpenDialog = (songId: string, songName: string, songAuthor: string, songUrl: string, songImgUrl: string) => {
         setSelectedSongId(songId);
-        setSelectedSongName(songName)
-        setSelectedSongAuthor(songAuthor)
+        setSelectedSongName(songName);
+        setSelectedSongAuthor(songAuthor);
+        setSelectedSongSongUrl(songUrl);
+        setSelectedSongImgUrl(songImgUrl);
         setIsPlaylistDialogOpen(true);
     };
 
@@ -98,7 +102,7 @@ const PlayBarSong: React.FC<PlayBarSongProps> = ({
                         cursor-pointer
                     "
                     // TODO: When clicked playlist dialogue opens
-                    onClick={(e) => { e.stopPropagation(); handleOpenDialog(data.id, data.title, data.author); }}
+                    onClick={(e) => { e.stopPropagation(); handleOpenDialog(data.id, data.title, data.author, data.song_path, data.image_path); }}
                 >
                     <AddToPlaylistDialogBtn onClick={()=>{}} className="text-white"/>
                 </div>
@@ -127,6 +131,8 @@ const PlayBarSong: React.FC<PlayBarSongProps> = ({
                     songId={selectedSongId}
                     songName={selectedSongName!}
                     songAuthor={selectedSongAuthor!}
+                    songImage={selectedSongImgUrl!}
+                    songUrl={selectedSongSongUrl!}
                     playlist={playlist}
                     isOpen={isPlaylistDialogOpen}
                     onClose={() => setIsPlaylistDialogOpen(false)}

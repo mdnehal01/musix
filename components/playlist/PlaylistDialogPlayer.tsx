@@ -5,7 +5,10 @@ import { Playlist } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import toast from "react-hot-toast";
 import AddToPlaylistBtn from "@/components/playlist/AddToPlaylistBtn";
-import { twMerge } from "tailwind-merge";
+import MediaItem from "./MediaItemPlaylist";
+import MediaItemPlaylist from "./MediaItemPlaylist";
+import CreatePlaylistBtn from "@/app/playlist/components/CreatePlaylistBtn";
+
 
 interface PlaylistDialoguePlayerProps {
     playlist: Playlist[];
@@ -13,11 +16,13 @@ interface PlaylistDialoguePlayerProps {
     songName?: string;
     songAuthor?:string;
     songId: string | null;
+    songImage:string;
+    songUrl: string; 
     isOpen: boolean;
     onClose: () => void;
 }
 
-const PlaylistDialoguePlayer: React.FC<PlaylistDialoguePlayerProps> = ({songAuthor, songName, songId, isOpen, onClose, playlist, className }) => { // Default value for playlist
+const PlaylistDialoguePlayer: React.FC<PlaylistDialoguePlayerProps> = ({songAuthor, songName, songId, songImage, songUrl,isOpen, onClose, playlist, className }) => { // Default value for playlist
     const supabaseClient = createClientComponentClient();
     if (!isOpen) return null;
 
@@ -52,20 +57,18 @@ const PlaylistDialoguePlayer: React.FC<PlaylistDialoguePlayerProps> = ({songAuth
     };
 
     return (
-            <div className="absolute w-[500px] h-[600px] z-50 bg-neutral-900 bottom-0 md:bottom-20 rounded-lg p-3">
+            <div className="absolute w-[500px] h-[600px] z-50 dark:bg-neutral-900 overflow-scroll scrollbar-none bg-slate-100 bottom-0 md:bottom-20 rounded-lg p-3">
                 <button onClick={onClose} className="absolute top-5 right-5">
                     <CgClose />
                 </button>
                 <div>
-                    <h1 className="text-white/80 text-xl">
+                    <h1 className="dark:text-white/80 text-black text-xl mb-6">
                         Add to playlist
                     </h1>
 
                     {songId && (
-                        <div>
-                            <p>Song: {songName}</p>
-                            <p>Author: {songAuthor}</p>
-                        </div>
+                        // @ts-ignore
+                        <MediaItemPlaylist songId={songId} songAuthor={songAuthor} songImgUrl={songImage} songName={songName}/>
                     )}
                     <div className="mt-10">
                         {playlist.map((playlistsingle) =>
@@ -78,16 +81,22 @@ const PlaylistDialoguePlayer: React.FC<PlaylistDialoguePlayerProps> = ({songAuth
                                     px-5
                                     rounded-md
                                     justify-between
-                                    hover:bg-neutral-500/10
+                                    dark:hover:bg-neutral-500/10
+                                    hover:bg-white
                                     cursor-pointer"
                                 key={playlistsingle.playlist_id}
                                 // onClick={() => songIDinSongArray(playlistsingle.playlist_id)}
                             >
-                                <p className="text-white text-lg font-bold">{playlistsingle.playlist_name}</p>
+                                <p className="text-lg font-bold">{playlistsingle.playlist_name}</p>
                                 <AddToPlaylistBtn onClick={() => songIDinSongArray(playlistsingle.playlist_id)} />
                             </div>)}
                     </div>
                 </div>
+                <br />
+                <center>
+                <CreatePlaylistBtn/>
+                </center>
+                
             </div>
     );
 };

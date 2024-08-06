@@ -34,7 +34,7 @@ const SongPage = async ({ params }: SongPageProps) => {
     <div
       className="
         dark:bg-[#1f1e1e8c]
-        bg-[#F3F5F9]
+        bg-[#F3F5F9]/10
         h-full 
         w-full
         overflow-hidden

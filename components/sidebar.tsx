@@ -175,7 +175,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlist }) => {
             </div>
 
             {/* Right Bar (Fixed) */}
-            <div className="hidden md:flex flex-col flex-shrink-0 dark:bg-[#0f0f0f9f] bg-[#F9F8F8] h-full w-[270px]">
+            <div className="hidden md:flex flex-col flex-shrink-0 dark:bg-[#0f0f0f9f] bg-rose-100/50 h-full w-[270px]">
                 <Box className="overflow-y-auto h-full bg-transparent">
                     <Library songs={songs}>{children}</Library>
                 </Box>

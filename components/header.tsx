@@ -121,6 +121,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
     const { setTheme } = useTheme();
 
+
     let modeIcon = pageDarkTheme ? <MdLightMode className="text-white"/> : <MdDarkMode className="text-rose-500"/>
 
     const toggleTheme = () => {

@@ -15,9 +15,11 @@ const useOnPlay = (songs:Song[]) => {
             return authModel.onOpen();
         }
 
-        if(!subscription) {    // Subscription model dialogue open
-            return subscribeModel.onOpen();
-        }
+        // IN FUTURE
+
+        // if(!subscription) {    // Subscription model dialogue open
+        //     return subscribeModel.onOpen();
+        // }
         
         player.setId(id);
 

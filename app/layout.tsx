@@ -36,7 +36,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className="bg-gradient-to-tr dark:from-[#002E09] from-white dark:via-[#001857] via-white dark:to-[#600000] to-white">
+      <body className="bg-gradient-to-tl dark:from-[#002E09] from-green-100 dark:via-[#001857] via-blue-100 dark:to-[#600000] to-red-100">
         <ThemeProvider
           attribute="class"
           defaultTheme="dark"
