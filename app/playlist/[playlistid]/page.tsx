@@ -8,7 +8,7 @@ import AddSongsBtn from "./components/addSongsBtn";
 import MediaItemDetailed from "@/components/mediaItemDetailed";
 import MediaItem from "@/components/mediaItem";
 import Footer from "@/components/footer/Footer";
-import { useUser } from "@/hooks/useUser";
+import DelAndShare from "./components/DelAndShare";
 
 interface PlaylistPageProps {
     params: {
@@ -25,6 +25,9 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
 
     // Extract the date part (YYYY-MM-DD)
     const datePart = createdAt.split('T')[0];
+
+    // @ts-ignore
+    const playlistUserId = fetchedPlaylist.user_id;
 
     // Function to format date to a more readable string
     function formatDate(dateString: string) {
@@ -76,12 +79,20 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
         >
             <Header>
                 <div className="mb-2 flex flex-col gap-y-6">
-                    <div className="flex justify-start items-center">
-                        <h1 className="text-white text-8xl font-extrabold">
-                            {/* @ts-ignore */}
-                            {fetchedPlaylist.playlist_name} &nbsp;
-                        </h1>
-                        <CgPlayList className="mt-2" size={50}/>
+                    <div className="flex justify-between items-center">
+
+                        <div>
+                            <h1 className="dark:text-white text-neutral-900 text-8xl font-extrabold">
+                                {/* @ts-ignore */}
+                                {fetchedPlaylist.playlist_name} &nbsp;
+                            </h1>
+                            <CgPlayList className="mt-2" size={50}/>
+                        </div>
+
+                        <div id="delete&ShareIcons">
+                            <DelAndShare playlistUserId={playlistUserId} playlistId={params.playlistid}/>
+                        </div>
+                        
                     </div>
                 </div>
                 <div className="flex items-center gap-x-3 mt-3">

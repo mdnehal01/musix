@@ -85,12 +85,14 @@ const PlaylistModel = () => {
           disabled={isLoading}
           {...register("playlist_name", { required: true })}
           placeholder="Playlist Name"
+          className="border border-neutral-400"
         />
         <Input
           id="description"
           disabled={isLoading}
           {...register("description", { required: false })}
           placeholder="Description"
+          className="border border-neutral-400"
         />
         <center>
           <Button

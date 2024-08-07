@@ -24,7 +24,8 @@ const Model: React.FC<ModelProps> = ({
         >
             <Dialog.Portal>
                 <Dialog.Overlay className="
-                    bg-neutral-900/90
+                    dark:bg-neutral-900/90
+                    bg-slate-200/80
                     backdrop-blur-sm
                     fixed
                     inset-0
@@ -36,7 +37,8 @@ const Model: React.FC<ModelProps> = ({
                         fixed
                         drop-shadow-md
                         border
-                        border-neutral-700
+                        dark:border-neutral-700
+                        border-neutral-300
                         top-[50%]
                         left-[50%]
                         max-h-full
@@ -49,7 +51,8 @@ const Model: React.FC<ModelProps> = ({
                         translate-x-[-50%]
                         translate-y-[-50%]
                         rounded-md
-                        bg-neutral-800
+                        dark:bg-neutral-800
+                        bg-slate-100
                         p-[25px]
                         focus:outline-none
                         z-50
@@ -68,8 +71,10 @@ const Model: React.FC<ModelProps> = ({
                     <Dialog.Close asChild>
                         <button 
                             className="
-                                text-neutral-400
-                                hover:text-white
+                                dark:text-neutral-400
+                                text-neutral-700
+                                dark:hover:text-white
+                                hover:text-neutral-400
                                 absolute 
                                 top-[10px]
                                 right-[10px]

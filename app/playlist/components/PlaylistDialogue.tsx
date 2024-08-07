@@ -49,12 +49,12 @@ const PlaylistDialogue: React.FC<PlaylistDialogueProps> = ({ songId, isOpen, onC
 
     return (
         <div className={twMerge(`absolute h-full w-full backdrop-blur-md top-0 left-0 z-50`, className)}>
-            <div className="md:p-12 p-3 max-md:pt-5 bg-neutral-800/90 rounded-md md:top-[50%] md:left-[50%] md:-translate-y-[50%] md:-translate-x-[50%] md:h-2/3 md:w-1/2 h-full w-full md:relative">
+            <div className="md:p-12 p-3 max-md:pt-5 dark:bg-neutral-800/90 bg-white rounded-md md:top-[50%] md:left-[50%] md:-translate-y-[50%] md:-translate-x-[50%] md:h-2/3 md:w-1/2 h-full w-full md:relative">
                 <button onClick={onClose} className="absolute top-5 right-5">
                     <CgClose />
                 </button>
                 <div>
-                    <h1 className="text-white/80 text-xl">
+                    <h1 className="dark:text-white/80 text-neutral-900 text-xl">
                         Add to playlist
                     </h1>
 
