@@ -101,7 +101,7 @@ const PlaylistPage = async ({ params }: PlaylistPageProps) => {
                     <p className="text-neutral-400 text-md">{formattedDate}</p>
                 </div>
                 <div className="w-full h-16 flex items-center">
-                    <AddSongsBtn/>
+                    <AddSongsBtn playlistUserId={playlistUserId}/>
                 </div>
             </Header>
 

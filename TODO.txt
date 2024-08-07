@@ -1,7 +1,9 @@
 Songs for your Birthday: Date wise filter(Released on your Birthday) + Pop, HIPHOP, Happy songs
 
-Deletion of playlist
+DONE: Deletion of playlist
 
 Remove song from playlist
 
 Add author page (Taylor swift, Etc)
+
+Make song play in queue if song play in playlist

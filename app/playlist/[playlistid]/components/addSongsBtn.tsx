@@ -6,9 +6,17 @@ import { useUser } from "@/hooks/useUser";
 import usePlaylistModel from "@/hooks/usePlaylistModel";
 import useSubscribeModel from "@/hooks/useSubscribeModel";
 import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
-const AddSongsBtn = () => {
+interface AddSongsBtnProps {
+  playlistUserId?:string;
+}
+
+const AddSongsBtn:React.FC<AddSongsBtnProps> = ({
+  playlistUserId
+}) => {
   const { user, subscription } = useUser();
+  const [showAddSongBtn, setShowAddSongBtn] = useState(false);
   const authModel = useAuthModel();
   const subscribeModel = useSubscribeModel();
   const playlistModel = usePlaylistModel();
@@ -33,13 +41,27 @@ const AddSongsBtn = () => {
     // return playlistModel.onOpen();
   };
 
+  useEffect(() => {
+    if (user?.id === playlistUserId) {
+      setShowAddSongBtn(true);
+  } else {
+      setShowAddSongBtn(false);
+  }
+  }, [user, playlistUserId])
+
   return (
-    <button
-      onClick={onClick}
-      className="h-12 w-56 bg-rose-500 flex text-lg hover:rounded-lg transition duration-200 text-black shadow-black/70 hover:shadow-black/30 shadow-lg items-center justify-center"
-    >
-      <p>Add Songs</p>
-    </button>
+    <div>
+      {showAddSongBtn ? (
+        <button
+        onClick={onClick}
+        className="h-12 w-56 bg-rose-500 flex text-lg hover:rounded-lg transition duration-200 text-black shadow-black/70 hover:shadow-black/30 shadow-lg items-center justify-center"
+      >
+        <p>Add Songs</p>
+      </button>
+      ) : (
+        <></>
+      )}
+    </div>
   );
 };
 

@@ -1,0 +1,4 @@
+Added deletion in playlist 
+means user can delete the playlist they created
+The deletion button will only appear if the playlist user id is same as the logged in user id
+Also Add Song button will only shown to the user whose playlist is that
