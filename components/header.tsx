@@ -21,7 +21,7 @@ import { useState } from "react";
 import Box from "./box";
 import Sidebaritem from "./sidebaritems";
 import { LuLogIn, LuLogOut } from "react-icons/lu";
-import { ToggleThemeBtn } from "./ToggleThemeBtn";
+import { ModeToggle } from "./ToggleThemeBtn";
 
 import { useTheme } from "next-themes";
 
@@ -116,25 +116,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
     const MenuIcon = !isSidebarOpen ? MdMenu : CgClose;
 
-    // THEME SET
-    const [pageDarkTheme, setPageDarkTheme] = useState(true);
-
-    const { setTheme } = useTheme();
-
-
-    let modeIcon = pageDarkTheme ? <MdLightMode className="text-white"/> : <MdDarkMode className="text-rose-500"/>
-
-    const toggleTheme = () => {
-        if(pageDarkTheme){
-            setPageDarkTheme(false)
-            setTheme("light")
-        }
-        else if(!pageDarkTheme){
-            setPageDarkTheme(true)
-            setTheme("dark")
-        }
-    }
-
     return (
         <div className={twMerge(`
             h-fit
@@ -156,9 +137,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
                     {/* THEME Button */}
                     
-                    <Button onClick={toggleTheme} className="border-2 border-white flex bg-transparent h-10 w-10 justify-center items-center">
-                        {modeIcon}
-                    </Button>
+                    <ModeToggle/>
 
                     {user ? (
                     <Button onClick={() => router.push('/account')} className="bg-white h-10 w-10 justify-center items-center">
@@ -168,7 +147,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     <></>
                    ) } 
                     
-        
                 </div>
                 
                 {/* Button for Home and Search in mobile mode */}
@@ -225,6 +203,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     {/* Logout and user profile buttons */}
                         {user ? (
                             <div className="flex w-full flex-col p-5 gap-y-3">
+                                <div className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-black transition py-1">
+                                    <ModeToggle/>
+                                    <p>Mode</p>
+                                </div>
                                 <div onClick={() => router.push('/account')} className="flex flex-row h-auto items-center w-full gap-x-4 text-md font-light cursor-pointer rounded-[1px] hover:text-rose-400 hover:border-r-[2px] border-rose-400 dark:text-neutral-400 text-black transition py-1">
                                     <FaUserAlt size={13}/> 
                                     <p>Account</p>

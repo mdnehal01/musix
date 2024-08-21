@@ -180,6 +180,14 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs, playlist }) => {
                     <Library songs={songs}>{children}</Library>
                 </Box>
             </div>
+
+                    
+            
+            {/* <div className="absolute shadow-md right-0 hover:top-0 top-20 hover:relative hidden -mr-[180px] hover:-mr-0 h-12 transition-all duration-300 md:flex flex-col flex-shrink-0 dark:bg-[#0f0f0f9f] bg-rose-100/50 hover:h-full w-[270px]">
+                <Box className="overflow-y-auto h-full bg-transparent">
+                    <Library songs={songs}>{children}</Library>
+                </Box>
+            </div> */}
         </div>
     );
 };

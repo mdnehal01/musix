@@ -49,17 +49,9 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
   const handleClickPlay = () => {
     if(!user){
       return authModel.onOpen();
-    } else{
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-      player.setId(data.id);
-    }
-  }
+    } 
+    player.setId(data.id)
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -103,7 +95,6 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
         {isHovered && <PlayPauseIcon size={50} className="text-white" />}
       </div>
 
-      <audio ref={audioRef} />
     </div>
   );
 };

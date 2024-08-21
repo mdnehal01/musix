@@ -7,3 +7,5 @@ Remove song from playlist
 Add author page (Taylor swift, Etc)
 
 Make song play in queue if song play in playlist
+
+Hum to search

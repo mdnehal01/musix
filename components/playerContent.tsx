@@ -18,6 +18,10 @@ import { BiCaretUp, BiDotsHorizontal, BiMinus, BiRepeat, BiShuffle } from "react
 import { Bars } from "react-loader-spinner";
 import SongOption from "./SongOption";
 import { twMerge } from "tailwind-merge";
+import toast from "react-hot-toast";
+import updateSongPlaytime from "@/actions/updateSongPlaytime";
+import updateUserRecents from "@/actions/updateUserRecent";
+import { useUser } from "@/hooks/useUser";
 
 
 interface PlayerContentProps {
@@ -65,6 +69,9 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   const audioRef = useRef<HTMLAudioElement>(null);
   const shakaPlayerRef = useRef<shaka.Player | null>(null);
   const dialogueRef = useRef<HTMLDivElement>(null);
+
+  const [hasPlayedHalf, setHasPlayedHalf] = useState(false);
+
 
   const Icon = isPlaying ? BsPauseFill : BsPlayFill;
   let VolumeIcon = HiSpeakerWave;
@@ -153,6 +160,8 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
 
   };
 
+  const [durationWithoutFormat, setDurationWithoutFormat] = useState(0);
+
   useEffect(() => {
     if (audioRef.current) {
       const audio = audioRef.current;
@@ -180,6 +189,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           await shakaPlayerRef.current?.load(songUrl);
           audio.volume = isMuted ? 0 : volume;
           setDuration(formatDuration(audio.duration));
+          setDurationWithoutFormat(audio.duration);
           
           audio.addEventListener("timeupdate", () => {
             setElapsedTime(audio.currentTime);
@@ -273,14 +283,22 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
     }
   }, [isPlaying, isMuted]);
 
-  if(elapsedTime > 45){
-    // TODO: Increase play times
+  const user = useUser();
+  const user_id = user.userDetails?.id
+  
+  if(elapsedTime > durationWithoutFormat/2 && !hasPlayedHalf){
+    // DONE: TODO: Increase no. play times of song in song database
+    // DONE: TODO: When a song exceeds half of the listening add the song in the recently played song list
+    updateUserRecents(song.id, user_id)
+    updateSongPlaytime(song.id)
+    setHasPlayedHalf(true)
   }
 
-  return (
-    
-    <div className={twMerge(`w-full h-full flex flex-col md:static relative items-center justify-end`, classname)}>
+  
+   
 
+  return (
+    <div className={twMerge(`w-full h-full flex flex-col md:static relative items-center justify-end`, classname)}>
       <div className="absolute md:top-2 md:right-[90px] max-md:left-[13%] max-md:top-[20%]">
             <Bars
                 height="20"
