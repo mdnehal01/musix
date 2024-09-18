@@ -61,13 +61,17 @@ const SongDetailsForPage: React.FC<SongDetailsForPageProps> = ({
         flex-col
         items-center
         gap-5
-        h-[300px]
-        w-full
+        md:h-[300px]
+        h-[200px]
+        w-[200px]
+        md:w-full
         overflow-hidden
         bg-center
         rounded-lg
         bg-no-repeat
         bg-cover
+        left-1/2
+        -translate-x-1/2
         relative
       "
     >
