@@ -80,6 +80,8 @@ const Player:React.FC<PlayerProps> = ({
                 px-4
                 md:pt-0
                 pt-7
+                md:mb-0
+                mb-10
             `, minimizedPlayer)}
 
             onClick={onclick}

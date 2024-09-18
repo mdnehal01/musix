@@ -24,6 +24,7 @@ import { LuLogIn, LuLogOut } from "react-icons/lu";
 import { ModeToggle } from "./ToggleThemeBtn";
 
 import { useTheme } from "next-themes";
+import BottomBarItems from "./BottomBarItems";
 
 // Define the HeaderProps interface
 interface HeaderProps {
@@ -84,12 +85,41 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             {
                 icon: CgProfile,
                 label: "Artist",
-                active: pathName === "/active",
-                href: "/active",
+                active: pathName === "/artists",
+                href: "/artists",
             },
         ],
         [pathName]
     );
+
+    const routesForBottomTabs = useMemo(
+        () => [
+            {
+                icon: HiHome,
+                label: "Home",
+                active: pathName === "/",
+                href: "/",
+            },
+            {
+                icon: BiSearch,
+                label: "Search",
+                active: pathName === "/search",
+                href: "/search",
+            },
+            {
+                icon: BiHeart,
+                label: "Favourites",
+                active: pathName === "/favourites",
+                href: "/favourites",
+            },
+            {
+                icon: CgPlayList,
+                label: "Playlist",
+                active: pathName === "/playlist",
+                href: "/playlist",
+            },
+        ], [pathName]
+    )
 
     const authModel = useAuthModel(); // Auth model hook
     const router = useRouter(); // Next.js router hook
@@ -234,14 +264,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             {children}
 
             {/* MOBILE VIEW Bottom Tab */}
-            <div className="md:hidden flex h-14 w-full absolute z-10 bottom-0 left-0 px-2 pb-2">
+            <div className="md:hidden flex h-14 w-full absolute z-10 bottom-0 left-0">
                 <div className="w-full h-full bg-neutral-800/95 rounded-lg flex justify-evenly items-center">
-                    <CgHome/>
-                    <CgSearch/>
-                    <CgHeart/>
-                    <CgPlayList/>
+                    {routesForBottomTabs.map((items) => (
+                        <BottomBarItems key={items.label} {...items}/>
+                    ))}
                     {user ? <CgUser onClick={() => router.push("/account")}/> : <LuLogIn onClick={authModel.onOpen}/>}
-                    
                 </div>
             </div>
         </div>
