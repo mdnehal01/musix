@@ -1,11 +1,9 @@
-import { Song } from "@/types";
 import getSongsById from "@/actions/getSongsById";
 import SongDetailsForPage from "@/components/songDetailsForPage";
 import Header from "@/components/header";
 import LikeButton from "@/components/likeButton";
 import Button from "@/components/button";
-import ListItem from "@/components/listItems";
-import { BiShare, BiShareAlt } from "react-icons/bi";
+import { BiShareAlt } from "react-icons/bi";
 import Footer from "@/components/footer/Footer";
 
 interface SongPageProps {
@@ -15,21 +13,21 @@ interface SongPageProps {
 }
 
 const SongPage = async ({ params }: SongPageProps) => {
-
+ 
   const fetchedSongs = await getSongsById(params.slug);
-
+ 
   const song = fetchedSongs.length > 0 ? fetchedSongs[0] : null;
-
+ 
   // @ts-ignore
   const time = song.duration;
   const min = Math.floor(parseInt(time)/60);
   const sec = Math.floor(parseInt(time)%60);
   const formatDuration = `${min}:${sec.toString().padStart(2, '0')}`;
-
+ 
   if (!song) {
     return <div>Song not found.</div>;
   }
-
+  
   return (
     <div
       className="
@@ -48,7 +46,7 @@ const SongPage = async ({ params }: SongPageProps) => {
           songUrl={song.song_path}
         />
       </Header>
-
+ 
       <div className="flex md:flex-row flex-col px-6 -mt-4 justify-between items-center">
         <div className="flex flex-col max-md:mt-6"> 
           <h1 className="font-extrabold text-6xl">{song.title}</h1>
@@ -67,20 +65,16 @@ const SongPage = async ({ params }: SongPageProps) => {
       <div className="px-6 mt-4 flex md:justify-start justify-center">
         <Button className="w-60 rounded-none ">Play</Button>
       </div>
-
+ 
       {/* TODO: Show author profile avatar and make it visitable */}
-
+ 
       {/* TODO: Recommend music based on above music */}
-
+ 
       {/* TODO: Show Lyrics */}
-
+ 
       <Footer/>
     </div>
   );
 };
 
 export default SongPage;
-
-
-
-
