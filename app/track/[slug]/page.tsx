@@ -6,6 +6,7 @@ import Button from "@/components/button";
 import { BiShareAlt } from "react-icons/bi";
 import Footer from "@/components/footer/Footer";
 import { PlayIcon } from "lucide-react";
+import Lyrics from "./components/Lyrics";
 
 interface SongPageProps {
   params: {
@@ -77,7 +78,10 @@ const SongPage = async ({ params }: SongPageProps) => {
       {/* TODO: Recommend music based on above music */}
  
       {/* TODO: Show Lyrics */}
- 
+      <p className="px-6 mt-16 text-2xl font-extrabold">Lyrics</p>
+      <br />
+      <Lyrics text={song.lyrics}/>      
+
       <Footer/>  
     </div>
     </>

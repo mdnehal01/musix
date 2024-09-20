@@ -33,7 +33,8 @@ const UploadModel = () => {
             image: null,
             genre:'',
             release_date:'',
-            album:''
+            album:'', 
+            lyrics: ''
         }
     });
 
@@ -114,7 +115,8 @@ const UploadModel = () => {
                     genre: values.genre,
                     release_date: values.release_date,
                     album: values.album,
-                    duration: duration // include duration in the data
+                    duration: duration, // include duration in the data
+                    lyrics: values.lyrics
                 });
 
             if (supabaseError) {
@@ -179,7 +181,14 @@ const UploadModel = () => {
                     {...register('album', { required: true })}
                     placeholder="Album Name"
                 />
-                
+
+                <textarea 
+                    id="lyrics" 
+                    disabled={isLoading}
+                    {...register('album', { required: true })}   
+                    placeholder="Lyrics"
+                    className="py-2 px-3 bg-transparent border-2 border-white rounded-md" 
+                ></textarea>        
 
                 <div>
                     <div className="pb-1">
