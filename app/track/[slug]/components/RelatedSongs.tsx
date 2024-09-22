@@ -52,5 +52,4 @@ const RelatedSongs = ({ relatedSongs }: RelatedSongsProps) => {
     </>
   );
 };
-
 export default RelatedSongs;
