@@ -83,8 +83,10 @@ export async function recommendSongs(songName: string, artistName: string): Prom
         console.log(recommendations)
   
         return {
+          // @ts-ignore
           recommendations: recommendations.body.tracks.map(track => ({
             name: track.name,
+            // @ts-ignore
             artists: track.artists.map(artist => artist.name)
           }))
         };
