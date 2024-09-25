@@ -1,0 +1,7 @@
+runtime: nodejs20  # Ensure you're using the correct Node.js version
+
+handlers:
+  # Handle dynamic requests through your Node.js app
+  - url: /.*
+    script: auto  # Automatically detect the main server file to handle requests
+    secure: always  # Redirect HTTP to HTTPS

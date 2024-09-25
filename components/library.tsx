@@ -1,7 +1,6 @@
 "use client"
 
 import { TbPlaylist } from "react-icons/tb";
-import { twMerge } from "tailwind-merge";
 import { AiOutlinePlus } from "react-icons/ai";
 import useAuthModel from "@/hooks/useAuthModel";
 import { useUser } from "@/hooks/useUser";

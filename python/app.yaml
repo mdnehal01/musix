@@ -1,0 +1,30 @@
+# # This is a comment
+
+runtime: nodejs20
+
+instance_class: F2
+
+env_variables:  
+    # BUCKET_NAME: "example-gcs-bucket"
+    NEXT_PUBLIC_SUPABASE_URL: "https://kezskricfbuksihuhhqt.supabase.co"
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlenNrcmljZmJ1a3NpaHVoaHF0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTgyODg1NzUsImV4cCI6MjAzMzg2NDU3NX0.d-5EW54rnejIVTYcPf9DAvng3y5EeaEG9KGGCp4z7u8"
+    SUPABASE_SERVICE_ROLE_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImtlenNrcmljZmJ1a3NpaHVoaHF0Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcxODI4ODU3NSwiZXhwIjoyMDMzODY0NTc1fQ.8ifTnS3_SEr4F49AG6uCoZQlWQdCmME2g439n9fKOxs"
+    NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: "pk_test_51PT9nvCFfCpI9FZtKrGgPtNIvMlFF46llQaxznw3cKgjEkcSjRvOIUgIJquwhfZOSb9Sp4l4wqJXDMLbZuY1Omec005uAuqIp4"
+    STRIPE_SECRET_KEY: "sk_test_51PT9nvCFfCpI9FZt9jEbbE1myG7Jqp4zckVhn5Jxuzh9wrOWEWIY0j055LhbqSdE3ichN09SC9iQYS1XTG4yy7Rr00kVJTqZMS"
+    STRIPE_WEBHOOK_SECRET: "whsec_8365009bf089a8af5ee6f3f9db25e623e484ea312e3246fee620bcad11942f75"
+    NEXT_PUBLIC_VERCEL_URL: "https://onemusix.vercel.app/"
+    gitAccessToken: "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"
+    gitCommitPwd: "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"
+    apiKeyForTestDiveRecommendation: "1036744-onemusix-FC62013D"
+    geniusDotComClientId: "WnbdR7OwdDl-IOIcbpZZbxGB4WEL462GlYLxgdo8lEL6ihy4t4DI5IJHBeA75aDo"
+    geniusDotComClientSecret: "jvMJB4QYcN-a9UrralNExJU-iLl55xNEORymbUxtwQV_rbSCih2ZU9Ge7Wxqr757cZCKF4KWWFrdYDQhSNUR_Q"
+    SPOTIFY_CLIENT_ID: "f4bd58f7f3e94661a63a3f7e5ad433d2"
+    SPOTIFY_CLIENT_SECRET: "fdba153e893644e4986e1954d0024eb4"
+
+handlers:
+    - url: /stylesheets
+    static_dir: stylesheets
+    - url: /.*  
+    secure: always  
+    redirect_http_response_code: 301  
+    script: auto
