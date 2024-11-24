@@ -1,6 +1,6 @@
 # set the base image to create the image for react app
 FROM node:20-alpine
-
+# THIS IS THE DOCKER FILE FOR MY PROJECT DEPLOYMENT
 # create a user with permissions to run the app
 # -S -> create a system user
 # -G -> add the user to a group
